@@ -1,977 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>escope-international</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- GSAP for animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-  <link rel="stylesheet" href="/assets/css/loading.css">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
-      color: #333;
-      background: #fff;
-      min-height: 100vh;
-    }
-    
-    /* Navbar */
-    .custom-navbar {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 8px 20px;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1000px;
-      margin: 20px auto;
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      width: calc(100% - 40px);
-      backdrop-filter: blur(10px);
-      transition: transform 0.4s ease, opacity 0.4s ease;
-    }
-    
-    .navbar-hidden {
-      transform: translateX(-50%) translateY(-100px);
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    .navbar-visible {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    .navbar-brand {
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: #e50914 !important;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .nav-link {
-      font-weight: 600;
-      color: #333 !important;
-      margin: 0 10px;
-      transition: all 0.3s ease;
-    }
-    
-    .nav-link:hover {
-      color: #e50914 !important;
-      transform: translateY(-2px);
-    }
-    
-    .btn-contact { 
-      background: #e50914; 
-      color: #fff; 
-      border-radius: 10px; 
-      padding: 10px 25px; 
-      border: 0;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .btn-contact:hover { 
-      background: #c40811; 
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(200, 8, 17, 0.4);
-    }
-    
-    /* Hero Section */
-    .hero {
-      background-color: #212121;
-      border-bottom-right-radius: 15vw;
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-     
-    }
-    
-    .hero:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    .hero:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-      border-top-left-radius: 15vw;
-    }
-    
-    .video-wrap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-bottom-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    #video-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      background-position: center center;
-      background-size: cover;
-      object-fit: cover;
-      transform: rotate(180deg);
-    }
-    
-    .gradient-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,1) 50%);
-      z-index: 1;
-      border-bottom-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    .hero-content {
-      position: relative;
-      text-align: center;
-      z-index: 2;
-      margin-bottom: 5rem;
-    }
-    
-    .hero-title {
-      font-size: 8vw;
-      line-height: 1em;
-      font-weight: 900;
-      mix-blend-mode: difference;
-      color: #fff;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .content-section {
-      padding: 100px 20px;
-      background: white;
-      position: relative;
-      z-index: 50;
-      border-top-left-radius: 15vw; 
-      
-    }
-    
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    
-    .section-title {
-      font-size: 7.5rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      text-align: center;
-      margin-bottom: 60px;
-      pointer-events: none;
-      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(
-        to bottom,
-        rgba(229, 9, 20, 0.35) 30%,
-        rgba(255, 255, 255, 0) 76%
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .content-section p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    
-    
-    .content-section {
-      background: white;
-      position: relative;
-      z-index: 50;
-      overflow: hidden;
-    }
-    
-    .about-title {
-      font-size: 7.5rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      text-align: center;
-      
-      pointer-events: none;
-      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(to bottom, rgb(4 4 4 / 59%) 30%, rgba(255, 255, 255, 0) 76%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .carousel-container {
-      width: 100%;
-      height: 300px;
-      position: relative;
-      perspective: 1000px;
-      margin: 0 auto;
-    }
-    
-    .carousel-track {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .card {
-      position: absolute;
-      width: 280px;
-      height: 380px;
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-      text-align: center;
-    }
-    
-    .card-icon {
-      font-size: 3.5rem;
-      color: #000000;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-    }
-    
-    .card h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    
-    .card p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #666;
-    }
-    
-    .card.center {
-      z-index: 10;
-      transform: scale(1.1) translateZ(0);
-      background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
-      box-shadow: 0 25px 50px rgba(229, 9, 20, 0.2);
-    }
-    
-    .card.center .card-icon {
-      transform: scale(1.2);
-      color: #c40811;
-    }
-    
-    .card.left-2 {
-      z-index: 1;
-      transform: translateX(-400px) scale(0.8) translateZ(-300px);
-      opacity: 0.7;
-      filter: grayscale(30%);
-    }
-    
-    .card.left-1 {
-      z-index: 5;
-      transform: translateX(-200px) scale(0.9) translateZ(-100px);
-      opacity: 0.9;
-      filter: grayscale(20%);
-    }
-    
-    .card.right-1 {
-      z-index: 5;
-      transform: translateX(200px) scale(0.9) translateZ(-100px);
-      opacity: 0.9;
-      filter: grayscale(20%);
-    }
-    
-    .card.right-2 {
-      z-index: 1;
-      transform: translateX(400px) scale(0.8) translateZ(-300px);
-      opacity: 0.7;
-      filter: grayscale(30%);
-    }
-    
-    .card.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    .member-info {
-      text-align: center;
-      margin-top: 40px;
-      transition: all 0.5s ease-out;
-    }
-    
-    .member-name {
-      color: #e50914;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .member-name::before,
-    .member-name::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      width: 100px;
-      height: 2px;
-      background: #e50914;
-    }
-    
-    .member-name::before {
-      left: -120px;
-    }
-    
-    .member-name::after {
-      right: -120px;
-    }
-    
-    .member-role {
-      color: #848696;
-      font-size: 1.5rem;
-      font-weight: 500;
-      opacity: 0.8;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 10px 0;
-      margin-top: -15px;
-      position: relative;
-    }
-    
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(229, 9, 20, 0.6);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 20;
-      transition: all 0.3s ease;
-      font-size: 1.5rem;
-      border: none;
-      outline: none;
-      padding-bottom: 4px;
-    }
-    
-    .nav-arrow:hover {
-      background: rgba(229, 9, 20, 0.9);
-      transform: translateY(-50%) scale(1.1);
-    }
-    
-    .nav-arrow.left {
-      left: 20px;
-      padding-right: 3px;
-    }
-    
-    .nav-arrow.right {
-      right: 20px;
-      padding-left: 3px;
-    }
-    
-    
-    footer {
-      background: #212121;
-      color: white;
-      padding: 80px 20px 40px;
-      text-align: center;
-      border-top-right-radius: 15vw;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    footer:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      bottom: 100%;
-      right: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    footer:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      bottom: 100%;
-      right: 0;
-      width: 15vw;
-      height: 15vw;
-      border-bottom-left-radius: 15vw;
-    }
-    
-    
-    .footer-bg-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 25vw;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.03);
-      z-index: 0;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    
-    .social-links {
-      margin: 20px 0;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .social-links a {
-      color: white;
-      font-size: 1.5rem;
-      margin: 0 10px;
-      transition: all 0.3s ease;
-    }
-    
-    .social-links a:hover {
-      color: #e50914;
-      transform: translateY(-3px);
-    }
-    
-    .footer-content {
-      position: relative;
-      z-index: 2;
-    }
-    
-    /* Media Queries */
-    @media screen and (max-width: 992px) {
-      .custom-navbar {
-        padding: 10px 15px;
-      }
-      
-      .navbar-brand {
-        font-size: 1.5rem;
-      }
-      
-      .hero-title {
-        font-size: 10vw;
-      }
-      
-      .about-title, .section-title {
-        font-size: 6rem;
-      }
-    }
-    
-    @media screen and (max-width: 768px) {
-      .hero-title {
-        font-size: 12vw;
-      }
-      
-      .hero {
-        min-height: 80vh;
-      }
-      
-      .content-section {
-        border-top-left-radius: 10vw;
-        margin-top: 8vw;
-      }
-      
-      .about-title, .section-title {
-        font-size: 3.5rem;
-      }
-
-      .card {
-        width: 200px;
-        height: 280px;
-        padding: 20px;
-      }
-      
-      .card-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-      }
-      
-      .card h3 {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-      }
-      
-      .card p {
-        font-size: 0.9rem;
-      }
-
-      .card.left-2 {
-        transform: translateX(-250px) scale(0.8) translateZ(-300px);
-      }
-
-      .card.left-1 {
-        transform: translateX(-120px) scale(0.9) translateZ(-100px);
-      }
-
-      .card.right-1 {
-        transform: translateX(120px) scale(0.9) translateZ(-100px);
-      }
-
-      .card.right-2 {
-        transform: translateX(250px) scale(0.8) translateZ(-300px);
-      }
-
-      .member-name {
-        font-size: 2rem;
-      }
-
-      .member-role {
-        font-size: 1.2rem;
-      }
-
-      .member-name::before,
-      .member-name::after {
-        width: 50px;
-      }
-
-      .member-name::before {
-        left: -70px;
-      }
-
-      .member-name::after {
-        right: -70px;
-      }
-      
-      footer {
-        border-top-right-radius: 25vw;
-        padding: 60px 20px 30px;
-      }
-      
-      footer:before,
-      footer:after {
-        width: 10vw;
-        height: 10vw;
-      }
-      
-      .footer-bg-text {
-        font-size: 30vw;
-      }
-    }
-    
-    @media screen and (max-width: 576px) {
-      .custom-navbar {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        padding: 8px 12px;
-      }
-      
-      .navbar-brand {
-        font-size: 1.3rem;
-      }
-      
-      .nav-link {
-        font-size: 0.9rem;
-        margin: 0 5px;
-      }
-      
-      .btn-contact {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-      }
-      
-      .hero-title {
-        font-size: 15vw;
-      }
-      
-      .hero {
-        min-height: 70vh;
-      }
-      
-      .content-section {
-        border-top-left-radius: 8vw;
-        margin-top: 8vw;
-        padding-top: 80px;
-      }
-      
-      .about-title, .section-title {
-        font-size: 3.0rem;
-      }
-      
-      .carousel-container {
-        height: 215px;
-      }
-      
-      .card {
-        width: 180px;
-        height: 250px;
-        padding: 15px;
-      }
-      
-      .card-icon {
-        font-size: 2rem;
-        margin-bottom: 10px;
-      }
-      
-      .card h3 {
-        font-size: 1.2rem;
-      }
-      
-      .card p {
-        font-size: 0.8rem;
-      }
-      
-      .nav-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 1.2rem;
-      }
-      
-      .nav-arrow.left {
-        left: 10px;
-      }
-      
-      .nav-arrow.right {
-        right: 10px;
-      }
-      
-      footer {
-        border-top-right-radius: 25vw;
-        padding: 45px 20px 20px;
-      }
-      
-      footer:before,
-      footer:after {
-        width: 8vw;
-        height: 8vw;
-      }
-      
-      .footer-bg-text {
-        font-size: 35vw;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Parallax Effect</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #efeeec;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Custom parallax styles with renamed classes */
+        .custom-parallax {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .custom-parallax-header {
+            z-index: 2;
+            padding: 4rem 2rem;
+            justify-content: center;
+            align-items: center;
+            min-height: 100svh;
+            display: flex;
+            position: relative;
+        }
+        
+        .custom-parallax-visuals {
+            object-fit: cover;
+            width: 100%;
+            max-width: none;
+            height: 120%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .custom-black-line {
+            z-index: 20;
+            background-color: #000;
+            width: 100%;
+            height: 2px;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+        }
+        
+        .custom-parallax-layers {
+            object-fit: cover;
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+        
+        .custom-parallax-fade {
+            z-index: 30;
+            object-fit: cover;
+            width: 100%;
+            max-width: none;
+            height: 20%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            --color-dark-rgb: 0, 0, 0;
+            background: linear-gradient(to top, rgba(var(--color-dark-rgb), 1) 0%, rgba(var(--color-dark-rgb), 0.738) 19%, rgba(var(--color-dark-rgb), 0.541) 34%, rgba(var(--color-dark-rgb), 0.382) 47%, rgba(var(--color-dark-rgb), 0.278) 56.5%, rgba(var(--color-dark-rgb), 0.194) 65%, rgba(var(--color-dark-rgb), 0.126) 73%, rgba(var(--color-dark-rgb), 0.075) 80.2%, rgba(var(--color-dark-rgb), 0.042) 86.1%, rgba(var(--color-dark-rgb), 0.021) 91%, rgba(var(--color-dark-rgb), 0.008) 95.2%, rgba(var(--color-dark-rgb), 0.002) 98.2%, transparent 100%);
+        }
+        
+        .custom-layer-img {
+            pointer-events: none;
+            object-fit: cover;
+            width: 100%;
+            max-width: none;
+            height: 117.5%;
+            position: absolute;
+            top: -17.5%;
+            left: 0;
+        }
+        
+        .custom-layer-title {
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100svh;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .custom-parallax-title {
+            pointer-events: auto;
+            text-align: center;
+            text-transform: none;
+            margin-top: 0;
+            margin-bottom: .1em;
+            margin-right: .075em;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 11vw;
+            font-weight: 800;
+            line-height: 1;
+            position: relative;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .custom-parallax-content {
+            padding: 4rem 2rem;
+            justify-content: center;
+            align-items: center;
+            min-height: 100svh;
+            display: flex;
+            position: relative;
+            background: #0a0a0a;
+        }
+        
+        .custom-icon-svg {
+            width: 8em;
+            position: relative;
+            color: #fff;
+        }
+        
+        .custom-credits {
+            z-index: 999;
+            pointer-events: none;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 4em;
+            padding: 1em;
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .custom-credits-p {
+            pointer-events: auto;
+            color: #efeeec80;
+            text-align: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 1.125em;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        
+        .custom-credits-a {
+            color: #efeeec;
+            text-decoration: none;
+        }
+        
+        .custom-credits-a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Content section styles */
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+        
+        .content-section p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #ccc;
+        }
+        
+        /* Demo content styles */
+        .demo-content {
+            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .demo-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .demo-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
-  <div class="loader">
-    <div class="load-text">
-      <div class="loaded-text">H</div>
-      <div class="loading-text">ello, World</div>
-    </div>
-  </div>
-
-
-
-  <nav class="custom-navbar navbar navbar-expand-lg navbar-light py-3">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="#">escope</a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#">Design</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Marketing</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Technology</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Expertise</a></li>
-        </ul>
-      </div>
-
-      <div class="d-none d-lg-block">
-        <a href="#" class="btn btn-contact">Contact us</a>
-      </div>
-    </div>
-  </nav>
-
-  
-  <section class="hero">
-    <div class="video-wrap">
-      <video autoplay playsinline loop muted id="video-bg">
-        <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="position-absolute w-100 gradient-overlay"></div>
-    <div class="content position-relative text-center mb-5">
-      <h1 class="hero-title blend">
-        Where Creativity <br>
-        &amp; Strategy Meet
-      </h1>
-    </div>
-  </section>
-
- 
-
-  <section class="content-section py-5">
-    <div class="container">
-      <h1 class="about-title">WHY CHOOSE US</h1>
-
-      <div class="carousel-container mb-5">
-        <button class="nav-arrow left">‹</button>
-        <div class="carousel-track">
-          <div class="card" data-index="0">
-            <i class="fas fa-paint-brush card-icon"></i>
-            <h3>Creative Design</h3>
-            <p>We create visually stunning designs that capture your brand's essence and engage your audience.</p>
-          </div>
-          <div class="card" data-index="1">
-            <i class="fas fa-chart-line card-icon"></i>
-            <h3>Digital Marketing</h3>
-            <p>Our data-driven marketing strategies help you reach the right audience and maximize ROI.</p>
-          </div>
-          <div class="card" data-index="2">
-            <i class="fas fa-code card-icon"></i>
-            <h3>Web Development</h3>
-            <p>We build responsive, high-performance websites and applications with cutting-edge technologies.</p>
-          </div>
-          <div class="card" data-index="3">
-            <i class="fas fa-mobile-alt card-icon"></i>
-            <h3>Mobile Apps</h3>
-            <p>From iOS to Android, we create intuitive mobile experiences that users love.</p>
-          </div>
-          <div class="card" data-index="4">
-            <i class="fas fa-search card-icon"></i>
-            <h3>SEO Optimization</h3>
-            <p>Boost your visibility and rankings with our comprehensive SEO strategies.</p>
-          </div>
-          <div class="card" data-index="5">
-            <i class="fas fa-bullhorn card-icon"></i>
-            <h3>Social Media</h3>
-            <p>Engage your audience and build your brand with our social media expertise.</p>
-          </div>
-        </div>
-        <button class="nav-arrow right">›</button>
-      </div>
-
-      <div class="d-none member-info">
-        <h2 class="member-name">Creative Design</h2>
-        <p class="member-role">We create visually stunning designs that capture your brand's essence and engage your audience.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-bg-text">escope</div>
-    <div class="container footer-content">
-      <h3>Ready to take your business to the next level?</h3>
-      <p>Contact us today for a free consultation</p>
-      <a href="#" class="btn btn-contact mt-3">Get Started</a>
-      
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-      <p>&copy; 2023 escope. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
- <script>
-    // Hide loader when page is fully loaded
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        const loader = document.querySelector('.loader');
-        loader.style.opacity = '0';
-        setTimeout(function() {
-          loader.style.display = 'none';
-        }, 500);
-      }, 3500); // Match the timing with the animation (3s + 0.5s buffer)
-    });
-
-    // Rest of your existing JavaScript...
-    const teamMembers = [
-      { name: "Creative Design", role: "We create visually stunning designs that capture your brand's essence and engage your audience." },
-      { name: "Digital Marketing", role: "Our data-driven marketing strategies help you reach the right audience and maximize ROI." },
-      { name: "Web Development", role: "We build responsive, high-performance websites and applications with cutting-edge technologies." },
-      { name: "Mobile Apps", role: "From iOS to Android, we create intuitive mobile experiences that users love." },
-      { name: "SEO Optimization", role: "Boost your visibility and rankings with our comprehensive SEO strategies." },
-      { name: "Social Media", role: "Engage your audience and build your brand with our social media expertise." },
-    ];
-
-    const cards = document.querySelectorAll(".card");
-    const memberName = document.querySelector(".member-name");
-    const memberRole = document.querySelector(".member-role");
-    const leftArrow = document.querySelector(".nav-arrow.left");
-    const rightArrow = document.querySelector(".nav-arrow.right");
-    let currentIndex = 0;
-    let isAnimating = false;
-
-    function updateCarousel(newIndex) {
-      if (isAnimating) return;
-      isAnimating = true;
-
-      currentIndex = (newIndex + cards.length) % cards.length;
-
-      cards.forEach((card, i) => {
-        const offset = (i - currentIndex + cards.length) % cards.length;
-
-        card.classList.remove(
-          "center",
-          "left-1",
-          "left-2",
-          "right-1",
-          "right-2",
-          "hidden"
-        );
-
-        if (offset === 0) {
-          card.classList.add("center");
-        } else if (offset === 1) {
-          card.classList.add("right-1");
-        } else if (offset === 2) {
-          card.classList.add("right-2");
-        } else if (offset === cards.length - 1) {
-          card.classList.add("left-1");
-        } else if (offset === cards.length - 2) {
-          card.classList.add("left-2");
-        } else {
-          card.classList.add("hidden");
-        }
-      });
-
-      memberName.style.opacity = "0";
-      memberRole.style.opacity = "0";
-
-      setTimeout(() => {
-        memberName.textContent = teamMembers[currentIndex].name;
-        memberRole.textContent = teamMembers[currentIndex].role;
-        memberName.style.opacity = "1";
-        memberRole.style.opacity = "1";
-      }, 300);
-
-      setTimeout(() => {
-        isAnimating = false;
-      }, 800);
-    }
-
-    leftArrow.addEventListener("click", () => {
-      updateCarousel(currentIndex - 1);
-    });
-
-    rightArrow.addEventListener("click", () => {
-      updateCarousel(currentIndex + 1);
-    });
-
-    cards.forEach((card, i) => {
-      card.addEventListener("click", () => {
-        updateCarousel(i);
-      });
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        updateCarousel(currentIndex - 1);
-      } else if (e.key === "ArrowRight") {
-        updateCarousel(currentIndex + 1);
-      }
-    });
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    document.addEventListener("touchend", (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          updateCarousel(currentIndex + 1);
-        } else {
-          updateCarousel(currentIndex - 1);
-        }
-      }
-    }
-
+    <!-- Your existing header/navigation would go here -->
     
-    const navbar = document.querySelector('.custom-navbar');
-    let lastScrollTop = 0;
-    const scrollThreshold = 100;
-
-    window.addEventListener('scroll', function() {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      if (scrollTop > scrollThreshold) {
-        if (scrollTop > lastScrollTop) {
-          
-          navbar.classList.add('navbar-hidden');
-          navbar.classList.remove('navbar-visible');
-        } else {
-         
-          navbar.classList.remove('navbar-hidden');
-          navbar.classList.add('navbar-visible');
-        }
-      } else {
+    <!-- Custom Parallax Section -->
+    <div class="custom-parallax">
+        <section class="custom-parallax-header">
+            <div class="custom-parallax-visuals">
+                <div class="custom-black-line"></div>
+                <div data-parallax-layers class="custom-parallax-layers">
+                    <img src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795be09b462b2e8ebf71_osmo-parallax-layer-3.webp" loading="eager" width="800" data-parallax-layer="1" alt="" class="custom-layer-img">
+                    <img src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795b4d5ac529e7d3a562_osmo-parallax-layer-2.webp" loading="eager" width="800" data-parallax-layer="2" alt="" class="custom-layer-img">
+                    <div data-parallax-layer="3" class="custom-layer-title">
+                        <h2 class="custom-parallax-title">Parallax</h2>
+                    </div>
+                    <img src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795bb5aceca85011ad83_osmo-parallax-layer-1.webp" loading="eager" width="800" data-parallax-layer="4" alt="" class="custom-layer-img">
+                </div>
+                <div class="custom-parallax-fade"></div>
+            </div>
+        </section>
         
-        navbar.classList.remove('navbar-hidden');
-        navbar.classList.add('navbar-visible');
-      }
-      
-      lastScrollTop = scrollTop;
-    });
-
-    updateCarousel(0);
-  </script>
+        <section class="custom-parallax-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="custom-icon-svg">
+                <path d="M94.8284 53.8578C92.3086 56.3776 88 54.593 88 51.0294V0H72V59.9999C72 66.6273 66.6274 71.9999 60 71.9999H0V87.9999H51.0294C54.5931 87.9999 56.3777 92.3085 53.8579 94.8283L18.3431 130.343L29.6569 141.657L65.1717 106.142C67.684 103.63 71.9745 105.396 72 108.939V160L88.0001 160L88 99.9999C88 93.3725 93.3726 87.9999 100 87.9999H160V71.9999H108.939C105.407 71.9745 103.64 67.7091 106.12 65.1938L106.142 65.1716L141.657 29.6568L130.343 18.3432L94.8284 53.8578Z" fill="currentColor"></path>
+            </svg>
+        </section>
+    </div>
+    
+    <!-- Demo content section -->
+    <section class="demo-content">
+        <h2>Your Content Goes Here</h2>
+        <p>This is a demonstration of how the custom parallax effect integrates with your existing content. The class names have been changed to prevent conflicts with your existing code.</p>
+        <a href="#" class="btn">Call to Action</a>
+    </section>
+    
+    <!-- Content section -->
+    <section class="content-section">
+        <h2>Seamless Integration</h2>
+        <p>All class names from the original Osmo parallax code have been prefixed with "custom-" to avoid any conflicts with your existing codebase. This ensures that the parallax effect will work properly without interfering with your current styles.</p>
+        <p>You can place this anywhere in your layout, and it should work seamlessly with your existing design.</p>
+    </section>
+    
+    <div class="custom-credits">
+        <p class="custom-credits-p">Resource by <a target="_blank" href="https://www.osmo.supply/" class="custom-credits-a">Osmo</a></p>
+    </div>
+    
+    <!-- Your existing footer would go here -->
+    
+    <!-- Required Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    
+    <!-- Parallax Implementation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Register GSAP Plugins
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Parallax Layers
+            document.querySelectorAll('[data-parallax-layers]').forEach((triggerElement) => {
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: triggerElement,
+                        start: "0% 0%",
+                        end: "100% 0%",
+                        scrub: 0
+                    }
+                });
+                
+                const layers = [
+                    { layer: "1", yPercent: 70 },
+                    { layer: "2", yPercent: 55 },
+                    { layer: "3", yPercent: 40 },
+                    { layer: "4", yPercent: 10 }
+                ];
+                
+                layers.forEach((layerObj, idx) => {
+                    tl.to(
+                        triggerElement.querySelectorAll(`[data-parallax-layer="${layerObj.layer}"]`),
+                        {
+                            yPercent: layerObj.yPercent,
+                            ease: "none"
+                        },
+                        idx === 0 ? undefined : "<"
+                    );
+                });
+            });
+            
+            // Lenis Smooth Scrolling
+            const lenis = new Lenis();
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+        });
+    </script>
 </body>
 </html>
