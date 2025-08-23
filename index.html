@@ -110,6 +110,11 @@
       justify-content: center;
      
     }
+    .featurd-story{
+      background-color: #212121;
+      border-bottom-right-radius: 15vw;
+      border-top-right-radius: 15vw;
+    }
     
     .hero:before {
       content: "";
@@ -223,7 +228,14 @@
       position: relative;
       z-index: 50;
       overflow: hidden;
+       max-width: 1000px;
+      margin: 0 auto;
     }
+
+   .featurd-story-sec{
+     max-width: 1000px;
+      margin: 0 auto;
+   }
     
     .about-title {
       font-size: 7.5rem;
@@ -235,6 +247,21 @@
       pointer-events: none;
       font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
       background: linear-gradient(to bottom, rgb(4 4 4 / 59%) 30%, rgba(255, 255, 255, 0) 76%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+     .featurd-titel{
+      font-size: 7.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      text-align: center;
+      pointer-events: none;
+       pointer-events: none;
+      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
+      background: linear-gradient(to bottom, #fff 30%, rgba(255, 255, 255, 0) 76%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -266,7 +293,7 @@
       background: white;
       border-radius: 20px;
       overflow: hidden;
-      
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       cursor: pointer;
       display: flex;
@@ -506,7 +533,7 @@
         font-size: 10vw;
       }
       
-      .about-title, .section-title {
+      .about-title, .featurd-titel {
         font-size: 6rem;
       }
     }
@@ -525,7 +552,7 @@
         margin-top: 8vw;
       }
       
-      .about-title, .section-title {
+      .about-title, .featurd-titel {
         font-size: 3.5rem;
       }
 
@@ -900,8 +927,9 @@
   </section>
 
 
-  <section class="featurd-story-sec container py-5">
-    <h1 class="about-title">FEATURED </h1>
+  <section class="featurd-story  py-5">
+    <div class="featurd-story-sec container">
+    <h1 class="featurd-titel">FEATURED </h1>
     
     <div class="row g-4">
       
@@ -965,6 +993,7 @@
         </a>
       </div>
 
+    </div>
     </div>
   </section>
 
