@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- GSAP for animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- css -->
+ <link rel="stylesheet" href="/assets/css/index.css" />
+
   <style>
     * {
       margin: 0;
@@ -105,6 +108,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+     
     }
     
     .hero:before {
@@ -165,19 +169,16 @@
       text-align: center;
       z-index: 2;
       margin-bottom: 5rem;
-      padding: 0 20px;
     }
     
     .hero-title {
-      font-size: clamp(3rem, 8vw, 8rem);
-      line-height: 1.1em;
+      font-size: 8vw;
+      line-height: 1em;
       font-weight: 900;
       mix-blend-mode: difference;
       color: #fff;
       position: relative;
       z-index: 2;
-      word-break: break-word;
-      overflow-wrap: break-word;
     }
     
     .content-section {
@@ -186,15 +187,13 @@
       position: relative;
       z-index: 50;
       border-top-left-radius: 15vw; 
+      
     }
     
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+   
     
     .section-title {
-      font-size: clamp(3rem, 7.5vw, 7.5rem);
+      font-size: 7.5rem;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: -0.02em;
@@ -210,8 +209,6 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      line-height: 1.1;
-      padding: 0 10px;
     }
     
     .content-section p {
@@ -220,29 +217,35 @@
       margin-bottom: 1.5rem;
     }
     
+    
+    .content-section {
+      background: white;
+      position: relative;
+      z-index: 50;
+      overflow: hidden;
+    }
+    
     .about-title {
-      font-size: clamp(3rem, 7.5vw, 7.5rem);
+      font-size: 7.5rem;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       text-align: center;
+      
       pointer-events: none;
       font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
       background: linear-gradient(to bottom, rgb(4 4 4 / 59%) 30%, rgba(255, 255, 255, 0) 76%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      line-height: 1.1;
-      padding: 0 10px;
     }
     
     .carousel-container {
       width: 100%;
-      height: 480px;
+      height: 300px;
       position: relative;
       perspective: 1000px;
       margin: 0 auto;
-      overflow: hidden;
     }
     
     .carousel-track {
@@ -263,7 +266,7 @@
       background: white;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       cursor: pointer;
       display: flex;
@@ -347,35 +350,34 @@
     
     .member-name {
       color: #e50914;
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 10px;
       position: relative;
       display: inline-block;
-      padding: 0 10px;
     }
     
     .member-name::before,
     .member-name::after {
       content: "";
       position: absolute;
-      top: 50%;
-      width: 60px;
+      top: 100%;
+      width: 100px;
       height: 2px;
       background: #e50914;
     }
     
     .member-name::before {
-      left: -70px;
+      left: -120px;
     }
     
     .member-name::after {
-      right: -70px;
+      right: -120px;
     }
     
     .member-role {
       color: #848696;
-      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-size: 1.5rem;
       font-weight: 500;
       opacity: 0.8;
       text-transform: uppercase;
@@ -383,7 +385,6 @@
       padding: 10px 0;
       margin-top: -15px;
       position: relative;
-      padding: 0 10px;
     }
     
     .nav-arrow {
@@ -422,96 +423,6 @@
       padding-left: 3px;
     }
     
-    /* Featured Stories Section - Hero Style */
-    .featured-stories-hero {
-      background-color: #212121;
-      border-bottom-right-radius: 15vw;
-      border-top-right-radius: 15vw;
-      position: relative;
-      padding: 47px 0 80px;
-      overflow: hidden;
-    }
-    
-    .featured-stories-hero:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    .featured-stories-hero:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-      border-top-left-radius: 15vw;
-    }
-    
-    .featured-video-wrap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-bottom-right-radius: 15vw;
-      pointer-events: none;
-      top: 0;
-      left: 0;
-    }
-    
-    #featured-video-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      background-position: center center;
-      background-size: cover;
-      object-fit: cover;
-    }
-    
-    .featured-gradient-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,1) 50%);
-      z-index: 1;
-      border-bottom-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    .featured-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 20px;
-    }
-    
-    .featured-title {
-      font-size: clamp(3rem, 7.5vw, 7.5rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      text-align: center;
-      margin-bottom: 60px;
-      pointer-events: none;
-      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.35) 30%,
-        rgba(255, 255, 255, 0) 76%
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 1.1;
-      padding: 0 10px;
-    }
     
     footer {
       background: #212121;
@@ -543,6 +454,7 @@
       height: 15vw;
       border-bottom-left-radius: 15vw;
     }
+    
     
     .footer-bg-text {
       position: absolute;
@@ -580,7 +492,210 @@
       z-index: 2;
     }
     
-    .card-custome {
+    /* Media Queries */
+    @media screen and (max-width: 992px) {
+      .custom-navbar {
+        padding: 10px 15px;
+      }
+      
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      
+      .hero-title {
+        font-size: 10vw;
+      }
+      
+      .about-title, .section-title {
+        font-size: 6rem;
+      }
+    }
+    
+    @media screen and (max-width: 768px) {
+      .hero-title {
+        font-size: 12vw;
+      }
+      
+      .hero {
+        min-height: 80vh;
+      }
+      
+      .content-section {
+        border-top-left-radius: 10vw;
+        margin-top: 8vw;
+      }
+      
+      .about-title, .section-title {
+        font-size: 3.5rem;
+      }
+
+      .card {
+        width: 200px;
+        height: 280px;
+        padding: 20px;
+      }
+      
+      .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+      }
+      
+      .card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      
+      .card p {
+        font-size: 0.9rem;
+      }
+
+      .card.left-2 {
+        transform: translateX(-250px) scale(0.8) translateZ(-300px);
+      }
+
+      .card.left-1 {
+        transform: translateX(-120px) scale(0.9) translateZ(-100px);
+      }
+
+      .card.right-1 {
+        transform: translateX(120px) scale(0.9) translateZ(-100px);
+      }
+
+      .card.right-2 {
+        transform: translateX(250px) scale(0.8) translateZ(-300px);
+      }
+
+      .member-name {
+        font-size: 2rem;
+      }
+
+      .member-role {
+        font-size: 1.2rem;
+      }
+
+      .member-name::before,
+      .member-name::after {
+        width: 50px;
+      }
+
+      .member-name::before {
+        left: -70px;
+      }
+
+      .member-name::after {
+        right: -70px;
+      }
+      
+      footer {
+        border-top-right-radius: 25vw;
+        padding: 60px 20px 30px;
+      }
+      
+      footer:before,
+      footer:after {
+        width: 10vw;
+        height: 10vw;
+      }
+      
+      .footer-bg-text {
+        font-size: 30vw;
+      }
+    }
+    
+    @media screen and (max-width: 576px) {
+      .custom-navbar {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 8px 12px;
+      }
+      
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+      
+      .nav-link {
+        font-size: 0.9rem;
+        margin: 0 5px;
+      }
+      
+      .btn-contact {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+      
+      .hero-title {
+        font-size: 15vw;
+      }
+      
+      .hero {
+        min-height: 70vh;
+      }
+      
+      .content-section {
+        border-top-left-radius: 8vw;
+        margin-top: 8vw;
+        padding-top: 80px;
+      }
+      
+      .about-title, .section-title {
+        font-size: 3.0rem;
+      }
+      
+      .carousel-container {
+        height: 215px;
+      }
+      
+      .card {
+        width: 180px;
+        height: 250px;
+        padding: 15px;
+      }
+      
+      .card-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+      
+      .card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .card p {
+        font-size: 0.8rem;
+      }
+      
+      .nav-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+      }
+      
+      .nav-arrow.left {
+        left: 10px;
+      }
+      
+      .nav-arrow.right {
+        right: 10px;
+      }
+      
+      footer {
+        border-top-right-radius: 25vw;
+        padding: 45px 20px 20px;
+      }
+      
+      footer:before,
+      footer:after {
+        width: 8vw;
+        height: 8vw;
+      }
+      
+      .footer-bg-text {
+        font-size: 35vw;
+      }
+    }
+
+
+        .card-custome {
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -619,7 +734,7 @@
     }
 
     .card-custome.hero-custome {
-      min-height: 540px;
+      min-height: 540px; /* 360px * 1.5 */
     }
     
     .card-custome.hero-custome .visual-custome {
@@ -683,407 +798,13 @@
       }
       
       .tall-card {
-        min-height: 450px;
+        min-height: 450px; /* 360px * 1.25 */
       }
     }
     
     .section-title {
       font-weight: 700;
       margin-bottom: 2rem;
-    }
-    
-    /* Media Queries - Enhanced for better responsiveness */
-    @media screen and (max-width: 1200px) {
-      .hero-title {
-        font-size: clamp(2.5rem, 10vw, 7rem);
-      }
-      
-      .carousel-container {
-        height: 350px;
-      }
-      
-      .card {
-        width: 250px;
-        height: 340px;
-      }
-      
-      .card.left-2 {
-        transform: translateX(-350px) scale(0.8) translateZ(-300px);
-      }
-      
-      .card.right-2 {
-        transform: translateX(350px) scale(0.8) translateZ(-300px);
-      }
-    }
-    
-    @media screen and (max-width: 992px) {
-      .custom-navbar {
-        padding: 10px 15px;
-      }
-      
-      .navbar-brand {
-        font-size: 1.5rem;
-      }
-      
-      .hero-title {
-        font-size: clamp(2.5rem, 9vw, 6rem);
-      }
-      
-      .about-title, .section-title, .featured-title {
-        font-size: clamp(2.5rem, 8vw, 5rem);
-      }
-      
-      .carousel-container {
-        height: 350px;
-      }
-      
-      .card {
-        width: 220px;
-        height: 300px;
-        padding: 20px;
-      }
-      
-      .card-icon {
-        font-size: 2.8rem;
-        margin-bottom: 15px;
-      }
-      
-      .card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-      }
-      
-      .card p {
-        font-size: 0.9rem;
-      }
-      
-      .card.left-2 {
-        transform: translateX(-300px) scale(0.8) translateZ(-300px);
-      }
-      
-      .card.left-1 {
-        transform: translateX(-150px) scale(0.9) translateZ(-100px);
-      }
-      
-      .card.right-1 {
-        transform: translateX(150px) scale(0.9) translateZ(-100px);
-      }
-      
-      .card.right-2 {
-        transform: translateX(300px) scale(0.8) translateZ(-300px);
-      }
-      
-      .nav-arrow {
-        width: 35px;
-        height: 35px;
-        font-size: 1.3rem;
-      }
-    }
-    
-    @media screen and (max-width: 768px) {
-      .hero-title {
-        font-size: clamp(2rem, 12vw, 5rem);
-      }
-      
-      .hero {
-        min-height: 80vh;
-      }
-      
-      .content-section {
-        border-top-left-radius: 10vw;
-        margin-top: 8vw;
-        padding: 80px 15px;
-      }
-      
-      .about-title, .section-title, .featured-title {
-        font-size: clamp(2rem, 9vw, 4rem);
-        margin-bottom: 40px;
-      }
-
-      .carousel-container {
-        height: 300px;
-      }
-      
-      .card {
-        width: 190px;
-        height: 260px;
-        padding: 15px;
-      }
-      
-      .card-icon {
-        font-size: 2.2rem;
-        margin-bottom: 12px;
-      }
-      
-      .card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 8px;
-      }
-      
-      .card p {
-        font-size: 0.85rem;
-        line-height: 1.4;
-      }
-
-      .card.left-2 {
-        transform: translateX(-240px) scale(0.8) translateZ(-300px);
-      }
-
-      .card.left-1 {
-        transform: translateX(-120px) scale(0.9) translateZ(-100px);
-      }
-
-      .card.right-1 {
-        transform: translateX(120px) scale(0.9) translateZ(-100px);
-      }
-
-      .card.right-2 {
-        transform: translateX(240px) scale(0.8) translateZ(-300px);
-      }
-
-      .member-name {
-        font-size: 1.8rem;
-      }
-
-      .member-role {
-        font-size: 1.1rem;
-      }
-
-      .member-name::before,
-      .member-name::after {
-        width: 40px;
-      }
-
-      .member-name::before {
-        left: -50px;
-      }
-
-      .member-name::after {
-        right: -50px;
-      }
-      
-      footer {
-        border-top-right-radius: 25vw;
-        padding: 60px 20px 30px;
-      }
-      
-      footer:before,
-      footer:after {
-        width: 10vw;
-        height: 10vw;
-      }
-      
-      .footer-bg-text {
-        font-size: 30vw;
-      }
-      
-      .card-custome.hero-custome {
-        min-height: 450px;
-      }
-    }
-    
-    @media screen and (max-width: 576px) {
-      .custom-navbar {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        padding: 8px 12px;
-      }
-      
-      .navbar-brand {
-        font-size: 1.3rem;
-      }
-      
-      .nav-link {
-        font-size: 0.9rem;
-        margin: 0 5px;
-      }
-      
-      .btn-contact {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-      }
-      
-      .hero-title {
-        font-size: clamp(1.8rem, 15vw, 4rem);
-        line-height: 1.2;
-      }
-      
-      .hero {
-        min-height: 70vh;
-      }
-      
-      .content-section {
-        border-top-left-radius: 8vw;
-        margin-top: 8vw;
-        padding: 60px 15px;
-      }
-      
-      .about-title, .section-title, .featured-title {
-        font-size: clamp(1.8rem, 10vw, 3.5rem);
-        margin-bottom: 30px;
-      }
-      
-      .carousel-container {
-        height: 250px;
-      }
-      
-      .card {
-        width: 160px;
-        height: 230px;
-        padding: 12px;
-      }
-      
-      .card-icon {
-        font-size: 1.8rem;
-        margin-bottom: 10px;
-      }
-      
-      .card h3 {
-        font-size: 1.1rem;
-      }
-      
-      .card p {
-        font-size: 0.75rem;
-        line-height: 1.3;
-      }
-      
-      .card.left-2 {
-        transform: translateX(-200px) scale(0.8) translateZ(-300px);
-      }
-      
-      .card.left-1 {
-        transform: translateX(-100px) scale(0.9) translateZ(-100px);
-      }
-      
-      .card.right-1 {
-        transform: translateX(100px) scale(0.9) translateZ(-100px);
-      }
-      
-      .card.right-2 {
-        transform: translateX(200px) scale(0.8) translateZ(-300px);
-      }
-      
-      .nav-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 1.1rem;
-      }
-      
-      .nav-arrow.left {
-        left: 8px;
-      }
-      
-      .nav-arrow.right {
-        right: 8px;
-      }
-      
-      .member-name {
-        font-size: 1.6rem;
-      }
-      
-      .member-role {
-        font-size: 1rem;
-      }
-      
-      .member-name::before,
-      .member-name::after {
-        width: 30px;
-      }
-      
-      .member-name::before {
-        left: -40px;
-      }
-      
-      .member-name::after {
-        right: -40px;
-      }
-      
-      footer {
-        border-top-right-radius: 25vw;
-        padding: 45px 15px 20px;
-      }
-      
-      footer:before,
-      footer:after {
-        width: 8vw;
-        height: 8vw;
-      }
-      
-      .footer-bg-text {
-        font-size: 35vw;
-      }
-      
-      .card-custome.hero-custome {
-        min-height: 380px;
-      }
-      
-      .card-custome:not(.hero-custome) {
-        min-height: 300px;
-      }
-    }
-    
-    @media screen and (max-width: 400px) {
-      .hero-title {
-        font-size: clamp(1.5rem, 15vw, 3rem);
-      }
-      
-      .carousel-container {
-        height: 250px;
-      }
-      
-      .card {
-        width: 140px;
-        height: 200px;
-        padding: 10px;
-      }
-      
-      .card-icon {
-        font-size: 1.5rem;
-      }
-      
-      .card h3 {
-        font-size: 1rem;
-      }
-      
-      .card p {
-        font-size: 0.7rem;
-      }
-      
-      .card.left-2 {
-        transform: translateX(-170px) scale(0.8) translateZ(-300px);
-      }
-      
-      .card.left-1 {
-        transform: translateX(-85px) scale(0.9) translateZ(-100px);
-      }
-      
-      .card.right-1 {
-        transform: translateX(85px) scale(0.9) translateZ(-100px);
-      }
-      
-      .card.right-2 {
-        transform: translateX(170px) scale(0.8) translateZ(-300px);
-      }
-      
-      .member-name::before,
-      .member-name::after {
-        display: none;
-      }
-    }
-    
-    /* Mobile menu improvements */
-    .navbar-collapse {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Prevent horizontal scrolling */
-    html, body {
-      max-width: 100%;
-      overflow-x: hidden;
     }
   </style>
 </head>
@@ -1120,7 +841,7 @@
       </video>
     </div>
     <div class="position-absolute w-100 gradient-overlay"></div>
-    <div class="hero-content position-relative text-center">
+    <div class="content position-relative text-center mb-5">
       <h1 class="hero-title blend">
         Where Creativity <br>
         &amp; Strategy Meet
@@ -1134,7 +855,7 @@
     <div class="container">
       <h1 class="about-title">WHY CHOOSE US</h1>
 
-      <div class="carousel-container ">
+      <div class="carousel-container mb-5">
         <button class="nav-arrow left">‹</button>
         <div class="carousel-track">
           <div class="card" data-index="0">
@@ -1179,85 +900,74 @@
   </section>
 
 
-  <!-- Featured Stories Section with Hero Style Background -->
-  <section class="featured-stories-hero">
-    <div class="featured-video-wrap">
-      <video autoplay playsinline loop muted id="featured-video-bg">
-        <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="position-absolute w-100 featured-gradient-overlay"></div>
+  <section class="featurd-story-sec container py-5">
+    <h1 class="about-title">FEATURED </h1>
     
-    <div class="featured-content">
-      <h2 class="featured-title">FEATURED </h2>
+    <div class="row g-4">
       
-      <div class="container">
-        <div class="row g-4">
-          
-          <!-- HERO CARD -->
-          <div class="col-12">
-            <a href="#" class="card-custome hero-custome">
-              <div class="visual-custome">
-                <picture>
-                  <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/tiger.webp"
-                       alt="Cute cartoon tiger illustration" width="512" height="512" loading="lazy" />
-                </picture>
-              </div>
-              <div class="content-custome justify-content-center hero-content">
-                <small class="mb-2">FEATURED STORY</small>
-                <h1 class="mb-3">Embark on Roaring Adventures with A Tiger's Tale</h1>
-                <small>January 8, 2024</small>
-              </div>
-            </a>
+      <!-- HERO CARD -->
+      <div class="col-12">
+        <a href="#" class="card-custome hero-custome">
+          <div class="visual-custome">
+            <picture>
+              <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/tiger.webp"
+                   alt="Cute cartoon tiger illustration" width="512" height="512" loading="lazy" />
+            </picture>
           </div>
-
-          <!-- OTHER CARDS -->
-          <div class="col-md-6 col-lg-4">
-            <a href="#" class="card-custome tall-card">
-              <div class="visual-custome">
-                <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/crocodile.webp" 
-                     alt="Cartoon crocodile illustration" width="512" height="512" loading="lazy" />
-              </div>
-              <div class="content-custome">
-                <small class="mb-2">FEATURED STORY</small>
-                <h3 class="mb-3">Chomping Chronicles: The Crocodile's Adventure</h3>
-                <small>January 12, 2024</small>
-              </div>
-            </a>
+          <div class="content-custome justify-content-center hero-content">
+            <small class="mb-2">FEATURED STORY</small>
+            <h1 class="mb-3">Embark on Roaring Adventures with A Tiger's Tale</h1>
+            <small>January 8, 2024</small>
           </div>
-
-          <div class="col-md-6 col-lg-4">
-            <a href="#" class="card-custome tall-card">
-              <div class="visual-custome">
-                <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/macaw.webp" 
-                     alt="Cartoon macaw illustration" width="512" height="512" loading="lazy" />
-              </div>
-              <div class="content-custome">
-                <small class="mb-2">FEATURED STORY</small>
-                <h3 class="mb-3">Vibrant Wings: Journey of the Macaw</h3>
-                <small>January 16, 2024</small>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-4">
-            <a href="#" class="card-custome tall-card">
-              <div class="visual-custome">
-                <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/cow.webp" 
-                     alt="Cartoon cow illustration" width="512" height="512" loading="lazy" />
-              </div>
-              <div class="content-custome">
-                <small class="mb-2">FEATURED STORY</small>
-                <h3 class="mb-3">Moo-rific Tales: The Brave Cow's Journey</h3>
-                <small>January 18, 2024</small>
-              </div>
-            </a>
-          </div>
-
-        </div>
+        </a>
       </div>
+
+      <!-- OTHER CARDS -->
+      <div class="col-md-6 col-lg-4">
+        <a href="#" class="card-custome tall-card">
+          <div class="visual-custome">
+            <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/crocodile.webp" 
+                 alt="Cartoon crocodile illustration" width="512" height="512" loading="lazy" />
+          </div>
+          <div class="content-custome">
+            <small class="mb-2">FEATURED STORY</small>
+            <h3 class="mb-3">Chomping Chronicles: The Crocodile's Adventure</h3>
+            <small>January 12, 2024</small>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="#" class="card-custome tall-card">
+          <div class="visual-custome">
+            <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/macaw.webp" 
+                 alt="Cartoon macaw illustration" width="512" height="512" loading="lazy" />
+          </div>
+          <div class="content-custome">
+            <small class="mb-2">FEATURED STORY</small>
+            <h3 class="mb-3">Vibrant Wings: Journey of the Macaw</h3>
+            <small>January 16, 2024</small>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="#" class="card-custome tall-card">
+          <div class="visual-custome">
+            <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/cow.webp" 
+                 alt="Cartoon cow illustration" width="512" height="512" loading="lazy" />
+          </div>
+          <div class="content-custome">
+            <small class="mb-2">FEATURED STORY</small>
+            <h3 class="mb-3">Moo-rific Tales: The Brave Cow's Journey</h3>
+            <small>January 18, 2024</small>
+          </div>
+        </a>
+      </div>
+
     </div>
   </section>
+
 
   
   <!-- Footer -->
@@ -1280,6 +990,8 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <!-- JS -->
+  <script src="/assets/js/index.js"></script>
   
 <script>
 // Your reveal effect function
