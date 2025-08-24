@@ -110,10 +110,13 @@
       justify-content: center;
      
     }
-    .featurd-story{
+    
+    .featurd-story {
       background-color: #212121;
       border-bottom-right-radius: 15vw;
       border-top-right-radius: 15vw;
+      position: relative;
+      overflow: hidden;
     }
     
     .hero:before {
@@ -157,6 +160,28 @@
       transform: rotate(180deg);
     }
     
+    /* Featured Story Video Background */
+    .featured-video-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-bottom-right-radius: 15vw;
+      border-top-right-radius: 15vw;
+      pointer-events: none;
+    }
+    
+    #featured-video-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      min-width: 100%;
+      background-position: center center;
+      background-size: cover;
+      object-fit: cover;
+      opacity: 0.7;
+    }
+    
     .gradient-overlay {
       position: absolute;
       bottom: 0;
@@ -166,6 +191,19 @@
       background: linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,1) 50%);
       z-index: 1;
       border-bottom-right-radius: 15vw;
+      pointer-events: none;
+    }
+    
+    .featured-gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(33,33,33,0.2) 0%, rgba(33,33,33,0.9) 100%);
+      z-index: 1;
+      border-bottom-right-radius: 15vw;
+      border-top-right-radius: 15vw;
       pointer-events: none;
     }
     
@@ -235,6 +273,8 @@
    .featurd-story-sec{
      max-width: 1000px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
    }
     
     .about-title {
@@ -261,7 +301,7 @@
       pointer-events: none;
        pointer-events: none;
       font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(to bottom, #fff 30%, rgba(255, 255, 255, 0) 76%);
+      background: linear-gradient(to bottom, rgb(255 255 255 / 41%) 30%, rgba(255, 255, 255, 0) 76%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -927,8 +967,16 @@
   </section>
 
 
-  <section class="featurd-story  py-5">
-    <div class="featurd-story-sec container">
+  <section class="featurd-story  ">
+    <!-- Video Background for Featured Story Section -->
+    <div class="featured-video-wrap">
+      <video autoplay playsinline loop muted id="featured-video-bg">
+        <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="position-absolute w-100 featured-gradient-overlay"></div>
+    
+    <div class="featurd-story-sec container py-5">
     <h1 class="featurd-titel">FEATURED </h1>
     
     <div class="row g-4">
