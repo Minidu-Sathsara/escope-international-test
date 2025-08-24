@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- GSAP for animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <!-- css -->
  <link rel="stylesheet" href="/assets/css/index.css" />
 
@@ -559,6 +561,425 @@
       z-index: 2;
     }
     
+    /* Star Wars Section Styles */
+    .star-wars-section {
+     
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    @font-face {
+      font-family: 'StarWarsFont';
+      src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff2') format('woff2'),
+      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff') format('woff'),
+      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansHeavyCAPS.ttf') format('truetype');
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'StarWarsFont';
+      src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff2') format('woff2'),
+      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff') format('woff'),
+      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansThinCAPS.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    .sw-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .sw-content {
+      height: 600px;
+      margin: auto;
+      width: 100%;
+      max-width: 1050px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .sw-bg-shape {
+      height: 100%;
+      background-image: linear-gradient(-45deg, #cc3843 0%, #cb193f 100%);
+      
+      border-radius: 30px;
+      padding: 45px 40px;
+      width: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sw-text-logo {
+      font-family: 'StarWarsFont', sans-serif;
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-align: center;
+      line-height: 1.2;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .sw-text-logo span {
+      display: block;
+      font-size: 28px;
+      letter-spacing: 8px;
+      margin-top: 10px;
+    }
+
+    .sw-nav-btn {
+      z-index: 22;
+      display: inline-flex;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      position: absolute;
+      top: 50%;
+      outline: none;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .sw-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .sw-prev-btn {
+      left: 20px;
+    }
+
+    .sw-next-btn {
+      right: 20px;
+    }
+
+    .sw-nav-btn.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .sw-nav-btn.disabled:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .sw-product-slider {
+      width: 75%;
+      height: 85%;
+      border-radius: 30px;
+      box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      overflow: hidden;
+    }
+
+    .sw-product-slider__wrp {
+      height: 100%;
+    }
+
+    .sw-product-slider__item {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sw-product-slider__card {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      transition: all .5s;
+      overflow: hidden;
+      position: relative;
+      border-radius: 30px;
+    }
+
+    .sw-product-slider__cover {
+      border-radius: 30px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .sw-product-slider__content {
+      color: #fff;
+      padding-top: 1px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding-left: 250px;
+      padding-right: 80px;
+    }
+
+    .sw-product-slider__title {
+      margin: 0;
+      margin-bottom: 10px;
+      font-family: 'StarWarsFont', sans-serif;
+      font-weight: 900;
+      font-size: 41px;
+      line-height: 1.2em;
+      letter-spacing: 2px;
+    }
+
+    .sw-product-img {
+      position: absolute;
+      z-index: 2;
+      width: 500px;
+      left: 25%;
+      transform: translateX(-45%);
+      max-height: 500px;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sw-product-img__item {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) translateX(-130px);
+      opacity: 0;
+      transition: all .3s;
+    }
+
+    .sw-product-img__item.active {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+      transition-delay: .3s;
+    }
+
+    .sw-product-img__img {
+      object-fit: contain;
+      object-position: center right;
+      max-height: 400px;
+    }
+
+    /* Arrow icons */
+    .sw-arrow-icon {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    /* Responsive styles for Star Wars section */
+    @media screen and (max-width: 1200px) {
+      .sw-content {
+        max-width: 920px;
+      }
+      
+      .sw-bg-shape {
+        width: 45%;
+      }
+      
+      .sw-text-logo {
+        font-size: 42px;
+      }
+      
+      .sw-text-logo span {
+        font-size: 22px;
+      }
+      
+      .sw-product-slider {
+        width: 80%;
+      }
+      
+      .sw-product-slider__content {
+        padding-left: 220px;
+      }
+      
+      .sw-product-slider__title {
+        font-size: 34px;
+      }
+      
+      .sw-product-img {
+        width: 430px;
+        left: 20%;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      .sw-wrapper {
+        height: auto;
+        min-height: 100vh;
+      }
+      
+      .sw-content {
+        max-width: 920px;
+        margin-top: 100px;
+        height: auto;
+        min-height: 100vh;
+      }
+      
+      .sw-bg-shape {
+        width: 90%;
+        height: 290px;
+        align-items: flex-start;
+        padding: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .sw-text-logo {
+        font-size: 38px;
+      }
+      
+      .sw-product-slider {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: auto;
+        position: relative;
+        top: 0;
+        margin-top: 170px;
+        margin-bottom: 100px;
+      }
+      
+      .sw-product-slider__content {
+        padding: 20px 60px 100px;
+        padding-top: 280px;
+        text-align: center;
+      }
+      
+      .sw-product-img {
+        width: 430px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        height: 350px;
+      }
+      
+      .sw-nav-btn {
+        top: 170px;
+        z-index: 25;
+      }
+      
+      .sw-prev-btn {
+        left: 10px;
+      }
+      
+      .sw-next-btn {
+        right: 10px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .sw-content {
+        margin-top: 20px;
+      }
+      
+      .sw-bg-shape {
+        padding: 30px;
+        width: 95%;
+        border-radius: 20px;
+      }
+      
+      .sw-text-logo {
+        font-size: 32px;
+      }
+      
+      .sw-text-logo span {
+        font-size: 18px;
+      }
+      
+      .sw-product-slider {
+        border-radius: 20px;
+      }
+      
+      .sw-product-slider__content {
+        padding: 20px 30px 50px;
+        padding-top: 300px;
+      }
+      
+      .sw-product-img {
+        width: 100%;
+        max-width: 400px;
+        top: 30px;
+        height: 390px;
+      }
+      
+      .sw-nav-btn {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .sw-arrow-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .sw-bg-shape {
+        height: 200px;
+        padding: 30px;
+      }
+      
+      .sw-text-logo {
+        font-size: 26px;
+      }
+      
+      .sw-text-logo span {
+        font-size: 14px;
+        letter-spacing: 6px;
+      }
+      
+      .sw-product-slider {
+        width: 85%;
+        margin-top: 130px;
+      }
+      
+      .sw-product-slider__content {
+        padding-top: 220px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+      .sw-product-slider__title {
+        font-size: 24px;
+      }
+      
+      .sw-product-img {
+        max-width: 300px;
+        height: 300px;
+      }
+      
+      .sw-nav-btn {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .sw-arrow-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    
     /* Media Queries */
     @media screen and (max-width: 992px) {
       .custom-navbar {
@@ -967,6 +1388,8 @@
   </section>
 
 
+
+
   <section class="featurd-story  ">
     <!-- Video Background for Featured Story Section -->
     <div class="featured-video-wrap">
@@ -1045,7 +1468,100 @@
     </div>
   </section>
 
+  <!-- Star Wars Product Showcase Section -->
+  <section class="star-wars-section">
+    <div class="container">
+    <div class="sw-wrapper">
+        <div class="sw-content">
+            <div class="sw-bg-shape">
+                <div class="sw-text-logo">
+                    STAR WARS
+                    <span>COLLECTION</span>
+                </div>
+            </div>
 
+            <div class="sw-product-img">
+                <div class="sw-product-img__item" id="sw-img1">
+                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-1.webp" alt="star wars" class="sw-product-img__img">
+                </div>
+
+                <div class="sw-product-img__item" id="sw-img2">
+                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-2.webp" alt="star wars" class="sw-product-img__img">
+                </div>
+
+                <div class="sw-product-img__item" id="sw-img3">
+                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405218/starwars/item-3.webp" alt="star wars" class="sw-product-img__img">
+                </div>
+
+                <div class="sw-product-img__item" id="sw-img4">
+                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-4.webp" alt="star wars" class="sw-product-img__img">
+                </div>
+            </div>
+
+            <div class="sw-product-slider">
+                <button class="sw-nav-btn sw-prev-btn disabled">
+                    <svg class="sw-arrow-icon" viewBox="0 0 32 32">
+                        <path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z"></path>
+                    </svg>
+                </button>
+                <button class="sw-nav-btn sw-next-btn">
+                    <svg class="sw-arrow-icon" viewBox="0 0 32 32">
+                        <path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z"></path>
+                    </svg>
+                </button>
+
+                <div class="sw-product-slider__wrp swiper-wrapper">
+                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img4">
+                        <div class="sw-product-slider__card">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405223/starwars/item-4-bg.webp" alt="star wars" class="sw-product-slider__cover">
+                            <div class="sw-product-slider__content">
+                                <h1 class="sw-product-slider__title">
+                                    STORMTROOPER <br>
+                                    HELMET
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img1">
+                        <div class="sw-product-slider__card">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="sw-product-slider__cover">
+                            <div class="sw-product-slider__content">
+                                <h1 class="sw-product-slider__title">
+                                    IMPERIAL ARMY'S <br> TIE FIGHTER
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img2">
+                        <div class="sw-product-slider__card">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-2-bg.webp" alt="star wars" class="sw-product-slider__cover">
+                            <div class="sw-product-slider__content">
+                                <h1 class="sw-product-slider__title">
+                                    KYLO REN'S <br> LIGHTSABER
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img3">
+                        <div class="sw-product-slider__card">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-3-bg.webp" alt="star wars" class="sw-product-slider__cover">
+                            <div class="sw-product-slider__content">
+                                <h1 class="sw-product-slider__title">
+                                    IMPERIAL ARMY'S <br>
+                                    DEATH STAR
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </section>
   
   <!-- Footer -->
   <footer>
@@ -1067,6 +1583,8 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
  <!-- JS -->
   <script src="/assets/js/index.js"></script>
   
@@ -1231,6 +1749,66 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize carousel if elements exist
   if (document.querySelectorAll(".card").length > 0) {
     initCarousel();
+  }
+  
+  // Initialize Star Wars slider
+  if (document.querySelector('.sw-product-slider')) {
+    var swiper = new Swiper('.sw-product-slider', {
+      spaceBetween: 30,
+      effect: 'fade',
+      loop: false,
+      navigation: {
+        nextEl: '.sw-next-btn',
+        prevEl: '.sw-prev-btn'
+      },
+      on: {
+        init: function(){
+          var index = this.activeIndex;
+          var target = this.slides[index].getAttribute('data-target');
+          
+          document.querySelectorAll('.sw-product-img__item').forEach(function(item) {
+            item.classList.remove('active');
+          });
+          
+          document.getElementById(target).classList.add('active');
+          
+          // Set initial button states
+          updateButtonStates(this);
+        }
+      }
+    });
+
+    swiper.on('slideChange', function () {
+      var index = this.activeIndex;
+      var target = this.slides[index].getAttribute('data-target');
+      
+      document.querySelectorAll('.sw-product-img__item').forEach(function(item) {
+        item.classList.remove('active');
+      });
+      
+      document.getElementById(target).classList.add('active');
+      
+      // Update button states after slide change
+      updateButtonStates(this);
+    });
+    
+    // Function to update button states
+    function updateButtonStates(swiperInstance) {
+      const prevBtn = document.querySelector('.sw-prev-btn');
+      const nextBtn = document.querySelector('.sw-next-btn');
+      
+      if(swiperInstance.isEnd) {
+        nextBtn.classList.add('disabled');
+      } else {
+        nextBtn.classList.remove('disabled');
+      }
+
+      if(swiperInstance.isBeginning) {
+        prevBtn.classList.add('disabled');
+      } else {
+        prevBtn.classList.remove('disabled');
+      }
+    }
   }
 });
 </script>
