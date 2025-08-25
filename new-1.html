@@ -1,2420 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>escope-international</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- GSAP for animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <!-- CustomEase for GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
-      color: #333;
-      background: #fff;
-      min-height: 100vh;
-    }
-    
-    /* Navbar */
-    .custom-navbar {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 8px 20px;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1000px;
-      margin: 20px auto;
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      width: calc(100% - 40px);
-      backdrop-filter: blur(10px);
-      transition: transform 0.4s ease, opacity 0.4s ease;
-    }
-    
-    .navbar-hidden {
-      transform: translateX(-50%) translateY(-100px);
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    .navbar-visible {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    .navbar-brand {
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: #e50914 !important;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .nav-link {
-      font-weight: 600;
-      color: #333 !important;
-      margin: 0 10px;
-      transition: all 0.3s ease;
-    }
-    
-    .nav-link:hover {
-      color: #e50914 !important;
-      transform: translateY(-2px);
-    }
-    
-    .btn-contact { 
-      background: #e50914; 
-      color: #fff; 
-      border-radius: 10px; 
-      padding: 10px 25px; 
-      border: 0;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .btn-contact:hover { 
-      background: #c40811; 
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(200, 8, 17, 0.4);
-    }
-    
-    /* Hero Section */
-    .hero {
-      background-color: #212121;
-      border-bottom-right-radius: 15vw;
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    
-
-    .featurd-story {
-      background-color: #212121;
-      border-bottom-right-radius: 15vw;
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-       border-top-right-radius: 15vw;
-    }
-    
-    .featurd-story:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    .featurd-story:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-      border-top-left-radius: 15vw;
-    }
-    
-    
-    .hero:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    .hero:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-      border-top-left-radius: 15vw;
-    }
-    
-    .video-wrap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-bottom-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    #video-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      background-position: center center;
-      background-size: cover;
-      object-fit: cover;
-      transform: rotate(180deg);
-    }
-    
-    /* Featured Story Video Background */
-    .featured-video-wrap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-bottom-right-radius: 15vw;
-      border-top-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    #featured-video-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      background-position: center center;
-      background-size: cover;
-      object-fit: cover;
-      opacity: 0.7;
-    }
-    
-    /* Portfolio Video Background */
-    .portfolio-video-wrap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-bottom-right-radius: 15vw;
-      border-top-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    #portfolio-video-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      background-position: center center;
-      background-size: cover;
-      object-fit: cover;
-      opacity: 0.7;
-    }
-    
-    .gradient-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,1) 50%);
-      z-index: 1;
-      border-bottom-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    .featured-gradient-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(33,33,33,0.2) 0%, rgba(33,33,33,0.9) 100%);
-      z-index: 1;
-      border-bottom-right-radius: 15vw;
-      border-top-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    .portfolio-gradient-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(33,33,33,0.2) 0%, rgba(33,33,33,0.9) 100%);
-      z-index: 1;
-      border-bottom-right-radius: 15vw;
-      border-top-right-radius: 15vw;
-      pointer-events: none;
-    }
-    
-    .hero-content {
-      position: relative;
-      text-align: center;
-      z-index: 2;
-      margin-bottom: 5rem;
-    }
-    
-    .hero-title {
-      font-size: 8vw;
-      line-height: 1em;
-      font-weight: 900;
-      mix-blend-mode: difference;
-      color: #fff;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .content-section {
-      padding: 100px 20px;
-      background: white;
-      position: relative;
-      z-index: 50;
-      border-top-left-radius: 15vw; 
-    }
-    
-    .section-title {
-      font-size: 7.5rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      text-align: center;
-      margin-bottom: 60px;
-      pointer-events: none;
-      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(
-        to bottom,
-        rgba(229, 9, 20, 0.35) 30%,
-        rgba(255, 255, 255, 0) 76%
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .content-section p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    
-    .content-section {
-      background: white;
-      position: relative;
-      z-index: 50;
-      overflow: hidden;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .featurd-story-sec{
-      max-width: 1000px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .about-title {
-      font-size: 7.5rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      text-align: center;
-      pointer-events: none;
-      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(to bottom, rgb(4 4 4 / 59%) 30%, rgba(255, 255, 255, 0) 76%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .featurd-titel{
-      font-size: 7.5rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      text-align: center;
-      pointer-events: none;
-      font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
-      background: linear-gradient(to bottom, rgb(255 255 255 / 41%) 30%, rgba(255, 255, 255, 0) 76%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .carousel-container {
-      width: 100%;
-      height: 300px;
-      position: relative;
-      perspective: 1000px;
-      margin: 0 auto;
-    }
-    
-    .carousel-track {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .card {
-      position: absolute;
-      width: 280px;
-      height: 380px;
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-      text-align: center;
-    }
-    
-    .card-icon {
-      font-size: 3.5rem;
-      color: #000000;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-    }
-    
-    .card h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    
-    .card p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #666;
-    }
-    
-    .card.center {
-      z-index: 10;
-      transform: scale(1.1) translateZ(0);
-      background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
-      box-shadow: 0 25px 50px rgba(229, 9, 20, 0.2);
-    }
-    
-    .card.center .card-icon {
-      transform: scale(1.2);
-      color: #c40811;
-    }
-    
-    .card.left-2 {
-      z-index: 1;
-      transform: translateX(-400px) scale(0.8) translateZ(-300px);
-      opacity: 0.7;
-      filter: grayscale(30%);
-    }
-    
-    .card.left-1 {
-      z-index: 5;
-      transform: translateX(-200px) scale(0.9) translateZ(-100px);
-      opacity: 0.9;
-      filter: grayscale(20%);
-    }
-    
-    .card.right-1 {
-      z-index: 5;
-      transform: translateX(200px) scale(0.9) translateZ(-100px);
-      opacity: 0.9;
-      filter: grayscale(20%);
-    }
-    
-    .card.right-2 {
-      z-index: 1;
-      transform: translateX(400px) scale(0.8) translateZ(-300px);
-      opacity: 0.7;
-      filter: grayscale(30%);
-    }
-    
-    .card.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    .member-info {
-      text-align: center;
-      margin-top: 40px;
-      transition: all 0.5s ease-out;
-      opacity: 1;
-    }
-    
-    .member-name {
-      color: #e50914;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .member-name::before,
-    .member-name::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      width: 100px;
-      height: 2px;
-      background: #e50914;
-    }
-    
-    .member-name::before {
-      left: -120px;
-    }
-    
-    .member-name::after {
-      right: -120px;
-    }
-    
-    .member-role {
-      color: #848696;
-      font-size: 1.5rem;
-      font-weight: 500;
-      opacity: 0.8;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 10px 0;
-      margin-top: -15px;
-      position: relative;
-    }
-    
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(229, 9, 20, 0.6);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 20;
-      transition: all 0.3s ease;
-      font-size: 1.5rem;
-      border: none;
-      outline: none;
-      padding-bottom: 4px;
-    }
-    
-    .nav-arrow:hover {
-      background: rgba(229, 9, 20, 0.9);
-      transform: translateY(-50%) scale(1.1);
-    }
-    
-    .nav-arrow.left {
-      left: 20px;
-      padding-right: 3px;
-    }
-    
-    .nav-arrow.right {
-      right: 20px;
-      padding-left: 3px;
-    }
-    
-    footer {
-      background: #212121;
-      color: white;
-      padding: 80px 20px 40px;
-      text-align: center;
-      border-top-right-radius: 15vw;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    footer:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      bottom: 100%;
-      right: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    footer:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      bottom: 100%;
-      right: 0;
-      width: 15vw;
-      height: 15vw;
-      border-bottom-left-radius: 15vw;
-    }
-    
-    .footer-bg-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 25vw;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.03);
-      z-index: 0;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    
-    .social-links {
-      margin: 20px 0;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-    
-    .social-links a {
-      color: white;
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .social-links a:hover {
-      color: #e50914;
-      transform: translateY(-3px);
-    }
-    
-    .footer-content {
-      position: relative;
-      z-index: 2;
-    }
-    
-    /* Star Wars Section Styles */
-    .star-wars-section {
-     
-      position: relative;
-      overflow: hidden;
-     
-    }
-    
-    @font-face {
-      font-family: 'StarWarsFont';
-      src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff2') format('woff2'),
-      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff') format('woff'),
-      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansHeavyCAPS.ttf') format('truetype');
-      font-weight: 900;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'StarWarsFont';
-      src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff2') format('woff2'),
-      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff') format('woff'),
-      url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansThinCAPS.ttf') format('truetype');
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    .sw-wrapper {
-      width: 100%;
-      min-height: 100vh;
-      background-size: cover;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-    }
-
-    .sw-content {
-      height: 600px;
-      margin: auto;
-      width: 100%;
-      max-width: 1050px;
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-
-    .sw-bg-shape {
-      height: 100%;
-      background-image: linear-gradient(-45deg, #e50914 0%, #e50914 100%);
-      border-radius: 30px;
-      padding: 45px 40px;
-      width: 50%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sw-text-logo {
-      font-family: 'StarWarsFont', sans-serif;
-      font-size: 52px;
-      font-weight: 900;
-      letter-spacing: 4px;
-      text-align: center;
-      line-height: 1.2;
-      text-transform: uppercase;
-      text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
-      color: white;
-    }
-
-    .sw-text-logo span {
-      display: block;
-      font-size: 28px;
-      letter-spacing: 8px;
-      margin-top: 10px;
-    }
-
-    .sw-nav-btn {
-      z-index: 22;
-      display: inline-flex;
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      position: absolute;
-      top: 50%;
-      outline: none;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      transition: all 0.3s ease;
-    }
-
-    .sw-nav-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    .sw-prev-btn {
-      left: 20px;
-    }
-
-    .sw-next-btn {
-      right: 20px;
-    }
-
-    .sw-nav-btn.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .sw-nav-btn.disabled:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .sw-product-slider {
-      width: 75%;
-      height: 85%;
-      border-radius: 30px;
-      box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      overflow: hidden;
-    }
-
-    .sw-product-slider__wrp {
-      height: 100%;
-    }
-
-    .sw-product-slider__item {
-      position: relative;
-      height: 100%;
-      width: 100%;
-    }
-
-    .sw-product-slider__card {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      transition: all .5s;
-      overflow: hidden;
-      position: relative;
-      border-radius: 30px;
-    }
-
-    .sw-product-slider__cover {
-      border-radius: 30px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    .sw-product-slider__content {
-      color: #fff;
-      padding-top: 1px;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      padding-left: 250px;
-      padding-right: 80px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
-
-    .sw-product-slider__title {
-      margin: 0;
-      margin-bottom: 10px;
-      font-family: 'StarWarsFont', sans-serif;
-      font-weight: 900;
-      font-size: 41px;
-      line-height: 1.2em;
-      letter-spacing: 2px;
-    }
-
-    .sw-product-img {
-      position: absolute;
-      z-index: 2;
-      width: 500px;
-      left: 25%;
-      transform: translateX(-45%);
-      max-height: 500px;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .sw-product-img__item {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      pointer-events: none;
-      user-select: none;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%) translateX(-130px);
-      opacity: 0;
-      transition: all .3s;
-    }
-
-    .sw-product-img__item.active {
-      opacity: 1;
-      transform: translateY(-50%) translateX(0);
-      transition-delay: .3s;
-    }
-
-    .sw-product-img__img {
-      object-fit: contain;
-      object-position: center right;
-      max-height: 400px;
-    }
-
-    /* Arrow icons */
-    .sw-arrow-icon {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-
-    /* Portfolio Section Styles - Fixed */
-   
-
-      .portfolio{
-      background-color: #212121;
-      border-bottom-right-radius: 15vw;
-       border-top-right-radius: 15vw;
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .portfolio:before {
-      content: "";
-      background-color: #212121;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-    }
-    
-    .portfolio:after {
-      content: "";
-      background-color: #fff;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 15vw;
-      height: 15vw;
-      border-top-left-radius: 15vw;
-    }
-    
-
-    .portfolio-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: auto;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .portfolio-items {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      flex: 1;
-      justify-content: center;
-      position: relative;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 20px 0;
-    }
-
-    .portfolio-items::-webkit-scrollbar {
-      display: none;
-    }
-
-    .portfolio-piece {
-      width: 100%;
-      text-align: center;
-      cursor: pointer;
-      margin-bottom: 1.5rem;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .piece-title-wrapper {
-      position: relative;
-      display: inline-block;
-      z-index: 5;
-      pointer-events: auto;
-      will-change: transform, opacity, filter;
-    }
-
-    .piece-title {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 0.5rem 0;
-      color: #ffffff;
-      transition: all 0.3s ease;
-    }
-
-    .hover-dot {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background-color: #e50914;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 100;
-      will-change: width, opacity;
-      border-radius: 50%;
-    }
-
-    .hover-dot.left {
-      left: -20px;
-    }
-
-    .hover-dot.right {
-      right: -20px;
-    }
-
-    .piece-expanded {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      padding: 0 1rem;
-      margin: 0;
-      pointer-events: none;
-      transition: all 0.5s ease;
-    }
-
-    .piece-details {
-      width: 25%;
-      text-align: left;
-      font-size: 0.8rem;
-      letter-spacing: 0.05rem;
-      font-weight: 500;
-      color: #666;
-    }
-
-    .piece-details .text-line {
-      overflow: hidden;
-      margin-bottom: 0.25rem;
-    }
-
-    .piece-details.right {
-      text-align: right;
-    }
-
-    .detail-tag {
-      margin-bottom: 0.25rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.05rem;
-      color: #fff;
-    }
-
-    .detail-year {
-      margin-top: 0.5rem;
-    }
-
-    .piece-visual {
-      width: 40%;
-      max-width: 400px;
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-    }
-
-    .visual-wrapper {
-      position: relative;
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .visual-wrapper img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    /* Active state for portfolio piece */
-    .portfolio-piece.active .piece-expanded {
-      max-height: 500px;
-      opacity: 1;
-      pointer-events: auto;
-      margin: 2rem 0;
-    }
-
-    /* Card Custom Styles */
-    .card-custome {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      color: #dee2e6;
-      text-decoration: none;
-     background-color: rgba(255, 255, 255, 0.15);
-      border-radius: 14px;
-      min-height: 360px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    
-    .card-custome:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .card-custome .visual-custome {
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    
-    .card-custome .visual-custome img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .card-custome .content-custome {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .card-custome.hero-custome {
-      min-height: 540px; /* 360px * 1.5 */
-    }
-    
-    .card-custome.hero-custome .visual-custome {
-      height: 50%;
-    }
-    
-    .card-custome:not(.hero-custome) .visual-custome {
-      height: 50%;
-    }
-
-    .card-custome h1, 
-    .card-custome h3 {
-      font-weight: 700;
-    }
-    
-    .card-custome small {
-      font-weight: 600;
-     color: #dee2e6;
-    }
-
-    /* Animation */
-    @media (prefers-reduced-motion: no-preference) {
-      .card-custome:hover img {
-        transform: scale(1.03);
-      }
-    }
-
-    /* Reveal animation */
-    @media (prefers-reduced-motion: no-preference) {
-      .card-custome:not(.hero-custome) {
-        opacity: 0;
-        transform: translateY(100px);
-        transition: opacity 0.66s ease, transform 1s cubic-bezier(0,0,0.1,1);
-      }
-      .reveal-custome {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-    }
-
-    /* Responsive adjustments */
-    @media (min-width: 768px) {
-      .card-custome.hero-custome {
-        flex-direction: row;
-      }
-      
-      .card-custome.hero-custome .visual-custome,
-      .card-custome.hero-custome .content-custome {
-        width: 50%;
-        height: 100%;
-      }
-      
-      .hero-content {
-        padding: 2rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .card-custome.hero-custome {
-        min-height: 540px;
-      }
-      
-      .tall-card {
-        min-height: 450px; /* 360px * 1.25 */
-      }
-    }
-    
-    .section-title {
-      font-weight: 700;
-      margin-bottom: 2rem;
-    }
-
-    /* Responsive styles for Star Wars section */
-    @media screen and (max-width: 1200px) {
-      .sw-content {
-        max-width: 920px;
-      }
-      
-      .sw-bg-shape {
-        width: 45%;
-      }
-      
-      .sw-text-logo {
-        font-size: 42px;
-      }
-      
-      .sw-text-logo span {
-        font-size: 22px;
-      }
-      
-      .sw-product-slider {
-        width: 80%;
-      }
-      
-      .sw-product-slider__content {
-        padding-left: 220px;
-      }
-      
-      .sw-product-slider__title {
-        font-size: 34px;
-      }
-      
-      .sw-product-img {
-        width: 430px;
-        left: 20%;
-      }
-    }
-
-    @media screen and (max-width: 992px) {
-      .sw-wrapper {
-        height: auto;
-        min-height: 100vh;
-      }
-      
-      .sw-content {
-        max-width: 920px;
-        margin-top: 100px;
-        height: auto;
-        min-height: 100vh;
-      }
-      
-      .sw-bg-shape {
-        width: 90%;
-        height: 290px;
-        align-items: flex-start;
-        padding: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      
-      .sw-text-logo {
-        font-size: 38px;
-      }
-      
-      .sw-product-slider {
-        width: 80%;
-        left: 50%;
-        transform: translateX(-50%);
-        height: auto;
-        position: relative;
-        top: 0;
-        margin-top: 170px;
-        margin-bottom: 100px;
-      }
-      
-      .sw-product-slider__content {
-        padding: 20px 60px 100px;
-        padding-top: 280px;
-        text-align: center;
-      }
-      
-      .sw-product-img {
-        width: 430px;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 0;
-        height: 350px;
-      }
-      
-      .sw-nav-btn {
-        top: 170px;
-        z-index: 25;
-      }
-      
-      .sw-prev-btn {
-        left: 10px;
-      }
-      
-      .sw-next-btn {
-        right: 10px;
-      }
-
-      .custom-navbar {
-        padding: 10px 15px;
-      }
-      
-      .navbar-brand {
-        font-size: 1.5rem;
-      }
-      
-      .hero-title {
-        font-size: 10vw;
-      }
-      
-      .about-title, .featurd-titel {
-        font-size: 6rem;
-      }
-
-      /* Portfolio responsive */
-      .piece-expanded {
-        flex-direction: column;
-      }
-
-      .piece-details {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-
-      .piece-details.right {
-        text-align: center;
-        margin-top: 1rem;
-        margin-bottom: 0;
-      }
-
-      .piece-visual {
-        width: 80%;
-      }
-
-      .piece-title {
-        font-size: 2rem;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      .hero-title {
-        font-size: 12vw;
-      }
-      
-      .hero {
-        min-height: 80vh;
-      }
-      
-      .content-section {
-        border-top-left-radius: 10vw;
-        margin-top: 8vw;
-      }
-      
-      .about-title, .featurd-titel {
-        font-size: 3.5rem;
-      }
-
-      .card {
-        width: 200px;
-        height: 280px;
-        padding: 20px;
-      }
-      
-      .card-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-      }
-      
-      .card h3 {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-      }
-      
-      .card p {
-        font-size: 0.9rem;
-      }
-
-      .card.left-2 {
-        transform: translateX(-250px) scale(0.8) translateZ(-300px);
-      }
-
-      .card.left-1 {
-        transform: translateX(-120px) scale(0.9) translateZ(-100px);
-      }
-
-      .card.right-1 {
-        transform: translateX(120px) scale(0.9) translateZ(-100px);
-      }
-
-      .card.right-2 {
-        transform: translateX(250px) scale(0.8) translateZ(-300px);
-      }
-
-      .member-name {
-        font-size: 2rem;
-      }
-
-      .member-role {
-        font-size: 1.2rem;
-      }
-
-      .member-name::before,
-      .member-name::after {
-        width: 50px;
-      }
-
-      .member-name::before {
-        left: -70px;
-      }
-
-      .member-name::after {
-        right: -70px;
-      }
-      
-      footer {
-        border-top-right-radius: 25vw;
-        padding: 60px 20px 30px;
-      }
-      
-      footer:before,
-      footer:after {
-        width: 10vw;
-        height: 10vw;
-      }
-      
-      .footer-bg-text {
-        font-size: 30vw;
-      }
-
-      /* Portfolio responsive */
-      .sw-content {
-        margin-top: 20px;
-      }
-      
-      .sw-bg-shape {
-        padding: 30px;
-        width: 95%;
-        border-radius: 20px;
-      }
-      
-      .sw-text-logo {
-        font-size: 32px;
-      }
-      
-      .sw-text-logo span {
-        font-size: 18px;
-      }
-      
-      .sw-product-slider {
-        border-radius: 20px;
-      }
-      
-      .sw-product-slider__content {
-        padding: 20px 30px 50px;
-        padding-top: 300px;
-      }
-      
-      .sw-product-img {
-        width: 100%;
-        max-width: 400px;
-        top: 30px;
-        height: 390px;
-      }
-      
-      .sw-nav-btn {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .sw-arrow-icon {
-        width: 20px;
-        height: 20px;
-      }
-    }
-
-    @media screen and (max-width: 576px) {
-      .custom-navbar {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        padding: 8px 12px;
-      }
-      
-      .navbar-brand {
-        font-size: 1.3rem;
-      }
-      
-      .nav-link {
-        font-size: 0.9rem;
-        margin: 0 5px;
-      }
-      
-      .btn-contact {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-      }
-      
-      .hero-title {
-        font-size: 15vw;
-      }
-      
-      .hero {
-        min-height: 70vh;
-      }
-      
-      .content-section {
-        border-top-left-radius: 8vw;
-        margin-top: 8vw;
-        padding-top: 80px;
-      }
-      
-      .about-title, .section-title {
-        font-size: 3.0rem;
-      }
-      
-      .carousel-container {
-        height: 215px;
-      }
-      
-      .card {
-        width: 180px;
-        height: 250px;
-        padding: 15px;
-      }
-      
-      .card-icon {
-        font-size: 2rem;
-        margin-bottom: 10px;
-      }
-      
-      .card h3 {
-        font-size: 1.2rem;
-      }
-      
-      .card p {
-        font-size: 0.8rem;
-      }
-      
-      .nav-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 1.2rem;
-      }
-      
-      .nav-arrow.left {
-        left: 10px;
-      }
-      
-      .nav-arrow.right {
-        right: 10px;
-      }
-      
-      footer {
-        border-top-right-radius: 25vw;
-        padding: 45px 20px 20px;
-      }
-      
-      footer:before,
-      footer:after {
-        width: 8vw;
-        height: 8vw;
-      }
-      
-      .footer-bg-text {
-        font-size: 35vw;
-      }
-
-      /* Portfolio responsive */
-      .sw-bg-shape {
-        height: 200px;
-        padding: 30px;
-      }
-      
-      .sw-text-logo {
-        font-size: 26px;
-      }
-      
-      .sw-text-logo span {
-        font-size: 14px;
-        letter-spacing: 6px;
-      }
-      
-      .sw-product-slider {
-        width: 85%;
-        margin-top: 130px;
-      }
-      
-      .sw-product-slider__content {
-        padding-top: 220px;
-        padding-left: 15px;
-        padding-right: 15px;
-      }
-      
-      .sw-product-slider__title {
-        font-size: 24px;
-      }
-      
-      .sw-product-img {
-        max-width: 300px;
-        height: 300px;
-      }
-      
-      .sw-nav-btn {
-        width: 35px;
-        height: 35px;
-      }
-      
-      .sw-arrow-icon {
-        width: 16px;
-        height: 16px;
-      }
-
-      /* Portfolio responsive */
-      .piece-title {
-        font-size: 1.8rem;
-      }
-
-      .portfolio-piece {
-        margin-bottom: 1rem;
-      }
-    }
-
-    /* AOS Animation Fixes */
-    [data-aos] {
-      pointer-events: none;
-    }
-    [data-aos].aos-animate {
-      pointer-events: auto;
-    }
-    
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Scroll Animation Demo</title>
+    <style>
+        :root {
+            --cube-size: 460px;
+            --cube-size-half: calc(var(--cube-size) / 2);
+            --perspective: 1000px;
+            --item-count: 4;
+            --frame-height: 100vh;
+        }
+
+        @media (max-width: 767px) {
+            :root {
+                --cube-size: 340px;
+                --frame-height: 100vh;
+            }
+            
+            .stage {
+                left: -16px !important;
+            }
+            
+            .nav {
+                left: calc(var(--cube-size) + 20px) !important;
+                right: 0 !important;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background: #B43E2E;
+            overflow-x: hidden;
+        }
+
+        .scroller {
+            scroll-snap-type: y mandatory;
+            height: var(--frame-height);
+            overflow: auto;
+            position: relative;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+        }
+
+        .nav {
+            position: absolute;
+            padding-top: 8px;
+            height: 96px;
+            width: 24px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(24px);
+            z-index: 3;
+            top: 0;
+            bottom: 0;
+            left: calc(var(--cube-size) + 64px);
+            right: 0;
+            margin: auto;
+            border-radius: 12px;
+            backface-visibility: hidden;
+            animation-name: offset-y;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .nav a {
+            display: flex;
+            height: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav a:nth-child(1) {
+            animation-name: nav-1;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .nav a:nth-child(2) {
+            animation-name: nav-2;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .nav a:nth-child(3) {
+            animation-name: nav-3;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .nav a:nth-child(4) {
+            animation-name: nav-4;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .nav a::before {
+            content: '';
+            height: 7px;
+            width: 7px;
+            background-color: white;
+            border-radius: 50%;
+            display: block;
+            mix-blend-mode: darken;
+        }
+
+        .scroll-item {
+            height: var(--frame-height);
+            scroll-snap-align: start;
+            position: relative;
+            z-index: 2;
+        }
+
+        [data-scroll-anim-block] {
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100svh;
+            perspective: var(--perspective);
+            transform-style: preserve-3d;
+            animation-name: perspective;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .spindle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: var(--cube-size);
+            height: var(--cube-size);
+            transform-style: preserve-3d;
+            transform: translateZ(calc(var(--cube-size-half) * -1));
+            animation-name: offset-y;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            font-weight: 900;
+            backface-visibility: hidden;
+            width: 50%;
+            overflow: hidden;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 200%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content img {
+            width: 100%;
+        }
+
+        .facia[data-right] {
+            left: auto; 
+            right: 0;
+        }
+
+        .facia[data-right] .content {
+            left: -100%;
+        }
+
+        .bg {
+            position: absolute;
+            width: 100%;
+            height: 400%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            animation-name: bg;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        /* Animations */
+        @keyframes offset-y {
+            0% {
+                transform: translateY(0) translateZ(calc(var(--cube-size-half) * -1)); 
+            }
+            100% {
+                transform: translateY(calc(var(--frame-height) * 3)) translateZ(calc(var(--cube-size-half) * -1)); 
+            }
+        }
+
+        @keyframes perspective {
+            0% {
+                perspective-origin: 50% 50vh;
+            }
+            100% {
+                perspective-origin: 50% 350vh;
+            }
+        }
+
+        @keyframes bg {
+            0% {
+                background-color: #B62916;
+            }
+            33.333% {
+                background-color: #235A43;
+            }
+            66.666% {
+                background-color: #3D1629;
+            }
+            100% {
+                background-color: #044351;
+            }
+        }
+
+        /* Facia animations */
+        .facia[data-order="1"][data-left] {
+            animation-name: spindle-1-left;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="1"][data-right] {
+            animation-name: spindle-1-right;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="2"][data-left] {
+            animation-name: spindle-2-left;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="2"][data-right] {
+            animation-name: spindle-2-right;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="3"][data-left] {
+            animation-name: spindle-3-left;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="3"][data-right] {
+            animation-name: spindle-3-right;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="4"][data-left] {
+            animation-name: spindle-4-left;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        .facia[data-order="4"][data-right] {
+            animation-name: spindle-4-right;
+            animation-duration: 1ms;
+            animation-direction: alternate;
+            animation-timeline: scroll(block nearest);
+            animation-timing-function: linear;
+        }
+
+        @keyframes spindle-1-left {
+            0% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(0deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-1-right {
+            0% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(0deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-2-left {
+            0% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(0deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-2-right {
+            0% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(0deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-3-left {
+            0% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(0deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-3-right {
+            0% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(0deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-4-left {
+            0% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(-90deg) translateZ(var(--cube-size-half)); }
+        }
+
+        @keyframes spindle-4-right {
+            0% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            33.333% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            66.666% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+            100% { transform: rotateX(90deg) translateZ(var(--cube-size-half)); }
+        }
+
+        /* Navigation animations */
+        @keyframes nav-1 {
+            0% { opacity: 1; }
+            33.333% { opacity: 0.2; }
+            66.666% { opacity: 0.2; }
+            100% { opacity: 0.2; }
+        }
+
+        @keyframes nav-2 {
+            0% { opacity: 0.2; }
+            33.333% { opacity: 1; }
+            66.666% { opacity: 0.2; }
+            100% { opacity: 0.2; }
+        }
+
+        @keyframes nav-3 {
+            0% { opacity: 0.2; }
+            33.333% { opacity: 0.2; }
+            66.666% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        @keyframes nav-4 {
+            0% { opacity: 0.2; }
+            33.333% { opacity: 0.2; }
+            66.666% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        /* Explainer styles */
+        .explainer {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background-color: transparent;
+            width: 300px;
+            color: white;
+            padding: 24px;
+            padding-right: 40px;
+            display: none;
+            z-index: 9;
+        }
+
+        .explainer input, .explainer div {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+        }
+
+        .explainer div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+        }
+
+        .explainer div::before {
+            content: 'i';
+        }
+
+        .explainer:has(input:checked) div::before {
+            content: '×';
+        }
+
+        .explainer p {
+            display: none;
+        }
+
+        .explainer:has(input:checked) p {
+            display: block;
+        }
+
+        .explainer:has(input:checked) {
+            background-color: black;
+        }
+
+        .explainer a {
+            color: inherit;
+            font-family: inherit;
+        }
+
+        .explainer p {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        .explainer p ~ p {
+            margin-top: 1em;
+        }
+
+        @media (min-width: 768px) {
+            .explainer {
+                display: block;
+            }
+        }
+
+        /* Fallback message for unsupported browsers */
+        .browser-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #ff5252;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        @supports not (animation-timeline: scroll()) {
+            .browser-warning {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
-  
-  <nav class="custom-navbar navbar navbar-expand-lg navbar-light py-3">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="#">escope</a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#">Design</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Marketing</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Technology</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Expertise</a></li>
-        </ul>
-      </div>
-
-      <div class="d-none d-lg-block">
-        <a href="#" class="btn btn-contact">Contact us</a>
-      </div>
+    <div class="browser-warning">
+        This demo requires Chrome 117+ with Experimental Web Platform Features enabled, or a browser that supports the scroll() animation timeline.
     </div>
-  </nav>
 
-  
-  <section class="hero">
-    <div class="video-wrap">
-      <video autoplay playsinline loop muted id="video-bg">
-        <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4">
-      </video>
+    <div class="explainer">
+        <input type="checkbox"></input>
+        <div></div>
+        <p>
+            Demo of CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll#browser_compatibility">scroll()</a> function in concert with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type">scroll-snap</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a>.
+        </p>
+        <p>
+            Works in Chrome 117+. Try in Chrome on Android or in Chrome Desktop responsive mode or with a trackpad for best scrolling experience.
+        </p>
+        <p>
+            <a href="https://x.com/paul_uiux">paul_uiux@</a>
+        </p>
     </div>
-    <div class="position-absolute w-100 gradient-overlay"></div>
-    <div class="content position-relative text-center mb-5">
-      <h1 class="hero-title blend" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-        Where Creativity <br>
-        &amp; Strategy Meet
-      </h1>
-    </div>
-  </section>
 
- 
-
-  <section class="content-section py-5">
-    <div class="container">
-      <h1 class="about-title" data-aos="fade-up" data-aos-duration="800">WHY CHOOSE US</h1>
-
-      <div class="carousel-container mb-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-        <button class="nav-arrow left">‹</button>
-        <div class="carousel-track">
-          <div class="card" data-index="0">
-            <i class="fas fa-paint-brush card-icon"></i>
-            <h3>Creative Design</h3>
-            <p>We create visually stunning designs that capture your brand's essence and engage your audience.</p>
-          </div>
-          <div class="card" data-index="1">
-            <i class="fas fa-chart-line card-icon"></i>
-            <h3>Digital Marketing</h3>
-            <p>Our data-driven marketing strategies help you reach the right audience and maximize ROI.</p>
-          </div>
-          <div class="card" data-index="2">
-            <i class="fas fa-code card-icon"></i>
-            <h3>Web Development</h3>
-            <p>We build responsive, high-performance websites and applications with cutting-edge technologies.</p>
-          </div>
-          <div class="card" data-index="3">
-            <i class="fas fa-mobile-alt card-icon"></i>
-            <h3>Mobile Apps</h3>
-            <p>From iOS to Android, we create intuitive mobile experiences that users love.</p>
-          </div>
-          <div class="card" data-index="4">
-            <i class="fas fa-search card-icon"></i>
-            <h3>SEO Optimization</h3>
-            <p>Boost your visibility and rankings with our comprehensive SEO strategies.</p>
-          </div>
-          <div class="card" data-index="5">
-            <i class="fas fa-bullhorn card-icon"></i>
-            <h3>Social Media</h3>
-            <p>Engage your audience and build your brand with our social media expertise.</p>
-          </div>
+    <div class="scroller">
+        <div class="bg" data-scroll-anim-block></div>
+        <div class="nav" data-scroll-anim-block>
+            <a href="#item1" data-scroll-anim-block></a>
+            <a href="#item2" data-scroll-anim-block></a>
+            <a href="#item3" data-scroll-anim-block></a>
+            <a href="#item4" data-scroll-anim-block></a>
         </div>
-        <button class="nav-arrow right">›</button>
-      </div>
-
-      <div class="member-info" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-        <h2 class="member-name">Creative Design</h2>
-        <p class="member-role">We create visually stunning designs that capture your brand's essence and engage your audience.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Section -->
-  
-  <section class="featurd-story  ">
-    <!-- Video Background for Featured Story Section -->
-    <div class="featured-video-wrap">
-      <video autoplay playsinline loop muted id="featured-video-bg">
-        <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="position-absolute w-100 featured-gradient-overlay"></div>
-    
-    <div class="featurd-story-sec container py-5">
-    <h1 class="featurd-titel" data-aos="fade-up" data-aos-duration="800">FEATURED </h1>
-    
-    <div class="row g-4">
-      
-      <!-- HERO CARD -->
-      <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-        <a href="#" class="card-custome hero-custome">
-          <div class="visual-custome">
-            <picture>
-              <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/tiger.webp"
-                   alt="Cute cartoon tiger illustration" width="512" height="512" loading="lazy" />
-            </picture>
-          </div>
-          <div class="content-custome justify-content-center hero-content">
-            <small class="mb-2">FEATURED STORY</small>
-            <h1 class="mb-3">Embark on Roaring Adventures with A Tiger's Tale</h1>
-            <small>January 8, 2024</small>
-          </div>
-        </a>
-      </div>
-
-      <!-- OTHER CARDS -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-        <a href="#" class="card-custome tall-card">
-          <div class="visual-custome">
-            <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/crocodile.webp" 
-                 alt="Cartoon crocodile illustration" width="512" height="512" loading="lazy" />
-          </div>
-          <div class="content-custome">
-            <small class="mb-2">FEATURED STORY</small>
-            <h3 class="mb-3">Chomping Chronicles: The Crocodile's Adventure</h3>
-            <small>January 12, 2024</small>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-        <a href="#" class="card-custome tall-card">
-          <div class="visual-custome">
-            <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/macaw.webp" 
-                 alt="Cartoon macaw illustration" width="512" height="512" loading="lazy" />
-          </div>
-          <div class="content-custome">
-            <small class="mb-2">FEATURED STORY</small>
-            <h3 class="mb-3">Vibrant Wings: Journey of the Macaw</h3>
-            <small>January 16, 2024</small>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-        <a href="#" class="card-custome tall-card">
-          <div class="visual-custome">
-            <img src="https://raw.githubusercontent.com/mobalti/open-props-interfaces/main/bento-grid/images/cow.webp" 
-                 alt="Cartoon cow illustration" width="512, height=512" loading="lazy" />
-          </div>
-          <div class="content-custome">
-            <small class="mb-2">FEATURED STORY</small>
-            <h3 class="mb-3">Moo-rific Tales: The Brave Cow's Journey</h3>
-            <small>January 18, 2024</small>
-          </div>
-        </a>
-      </div>
-
-    </div>
-    </div>
-  </section>
-
-  <!-- Star Wars Product Showcase Section -->
-  <section class="star-wars-section">
-    <div class="container">
-    <div class="sw-wrapper">
-        <div class="sw-content">
-            <div class="sw-bg-shape" data-aos="fade-right" data-aos-duration="1000">
-                <div class="sw-text-logo">
-                    STAR WARS
-                    <span>COLLECTION</span>
-                </div>
-            </div>
-
-            <div class="sw-product-img">
-                <div class="sw-product-img__item" id="sw-img1">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-1.webp" alt="star wars" class="sw-product-img__img">
-                </div>
-
-                <div class="sw-product-img__item" id="sw-img2">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-2.webp" alt="star wars" class="sw-product-img__img">
-                </div>
-
-                <div class="sw-product-img__item" id="sw-img3">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405218/starwars/item-3.webp" alt="star wars" class="sw-product-img__img">
-                </div>
-
-                <div class="sw-product-img__item" id="sw-img4">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-4.webp" alt="star wars" class="sw-product-img__img">
-                </div>
-            </div>
-
-            <div class="sw-product-slider" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
-                <button class="sw-nav-btn sw-prev-btn disabled">
-                    <svg class="sw-arrow-icon" viewBox="0 0 32 32">
-                        <path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.480-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z"></path>
-                    </svg>
-                </button>
-                <button class="sw-nav-btn sw-next-btn">
-                    <svg class="sw-arrow-icon" viewBox="0 0 32 32">
-                        <path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088-0.704 1.696-0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z"></path>
-                    </svg>
-                </button>
-
-                <div class="sw-product-slider__wrp swiper-wrapper">
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img4">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405223/starwars/item-4-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    STORMTROOPER <br>
-                                    HELMET
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img1">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    IMPERIAL ARMY'S <br> TIE FIGHTER
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img2">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-2-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    KYLO REN'S <br> LIGHTSABER
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img3">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-3-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    IMPERIAL ARMY'S <br>
-                                    DEATH STAR
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-  </section>
-  
-  <!-- Portfolio Section with Video Background -->
-  <section class="portfolio">
-    <!-- Video Background for Portfolio Section -->
-    <div class="portfolio-video-wrap">
-      <video autoplay playsinline loop muted id="portfolio-video-bg">
-        <source src="https://assets.codepen.io/319606/tactus-waves-hero-sm.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="position-absolute w-100 portfolio-gradient-overlay"></div>
-    
-    <div class="container mt-5">
-      <h1 class="featurd-titel" data-aos="fade-up" data-aos-duration="800">OUR PROJECTS</h1>
-      <div class="portfolio-container">
-        <div class="portfolio-items">
-          <div class="portfolio-piece" data-index="0" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">COSMIC DEPTHS</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">SPATIAL AWARENESS</p>
-                <p class="detail-tag">EXPANSIVE VISION</p>
-                <p class="detail-tag">ETERNAL MOMENT</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/2519c3a3-40c4-49ff-95ed-928b3cf69740?format=jpeg" alt="Cosmic depths image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">SILENT OBSERVATION</p>
-                <p class="detail-tag">TIMELESS CAPTURE</p>
-                <p class="detail-tag">BEYOND PERCEPTION</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">FOURTH DIMENSION</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">TEMPORAL SHIFT</p>
-                <p class="detail-tag">BEYOND LINEAR</p>
-                <p class="detail-tag">QUANTUM SPACE</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/17b5c6b8-91c7-420b-8b98-29ec22b1afbb?format=jpeg" alt="Fourth dimension image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">TIME COLLAPSE</p>
-                <p class="detail-tag">HYPERCUBE VISION</p>
-                <p class="detail-tag">BEYOND LIMITS</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="2" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">INNER VOID</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">NEGATIVE SPACE</p>
-                <p class="detail-tag">CONSCIOUS ABSENCE</p>
-                <p class="detail-tag">SILENT DEPTH</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/9ed5e53a-bc97-4f58-bbde-3c4590687eb7?format=jpeg" alt="Inner void image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">CREATIVE EMPTINESS</p>
-                <p class="detail-tag">QUANTUM POTENTIAL</p>
-                <p class="detail-tag">ABSOLUTE STILLNESS</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="3" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">PRESENT WITNESS</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">AWARE PERCEPTION</p>
-                <p class="detail-tag">PHOTOGRAPHIC TRUTH</p>
-                <p class="detail-tag">ESSENTIAL SEEING</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/29733ed0-b6cc-4991-8585-159f41f658a9?format=jpeg" alt="Present witness image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">SUSPENDED MOMENT</p>
-                <p class="detail-tag">DISTILLED REALITY</p>
-                <p class="detail-tag">INFINITE FRAME</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">CREATIVE FLOW</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">CHANNELED INSIGHT</p>
-                <p class="detail-tag">BEYOND THOUGHT</p>
-                <p class="detail-tag">PURE EXPRESSION</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/2519c3a3-40c4-49ff-95ed-928b3cf69740?format=jpeg" alt="Creative flow image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">TIMELESS STATE</p>
-                <p class="detail-tag">DIRECT CONNECTION</p>
-                <p class="detail-tag">SOURCE ALIGNMENT</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="5" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">UNIVERSAL LENS</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">COSMIC PERSPECTIVE</p>
-                <p class="detail-tag">UNIVERSAL TRUTH</p>
-                <p class="detail-tag">SINGULAR VISION</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/17b5c6b8-91c7-420b-8b98-29ec22b1afbb?format=jpeg" alt="Universal lens image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">SPACE COLLAPSE</p>
-                <p class="detail-tag">UNIFIED FIELD</p>
-                <p class="detail-tag">QUANTUM OBSERVER</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">ESSENTIAL LIGHT</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">PHOTON DANCE</p>
-                <p class="detail-tag">ILLUMINATION</p>
-                <p class="detail-tag">PURE REVELATION</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/9ed5e53a-bc97-4f58-bbde-3c4590687eb7?format=jpeg" alt="Essential light image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">LUMINOUS TRUTH</p>
-                <p class="detail-tag">SPACE BETWEEN</p>
-                <p class="detail-tag">RADIANT ESSENCE</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-piece" data-index="7" data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
-            <div class="piece-title-wrapper">
-              <div class="hover-dot left"></div>
-              <h2 class="piece-title">SACRED FRAME</h2>
-              <div class="hover-dot right"></div>
-            </div>
-            <div class="piece-expanded">
-              <div class="piece-details left">
-                <p class="detail-tag">DECISIVE MOMENT</p>
-                <p class="detail-tag">ETERNAL CAPTURE</p>
-                <p class="detail-tag">BOUNDARY DISSOLVE</p>
-              </div>
-              <div class="piece-visual">
-                <div class="visual-wrapper">
-                  <img src="https://cdn.cosmos.so/29733ed0-b6cc-4991-8585-159f41f658a9?format=jpeg" alt="Sacred frame image">
-                </div>
-              </div>
-              <div class="piece-details right">
-                <p class="detail-tag">LIMITLESS VIEW</p>
-                <p class="detail-tag">SACRED GEOMETRY</p>
-                <p class="detail-tag">INFINITE MOMENT</p>
-                <p class="detail-year">/2025</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-bg-text">escope</div>
-    <div class="container footer-content">
-      <h3 data-aos="fade-up" data-aos-duration="800">Ready to take your business to the next level?</h3>
-      <p data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">Contact us today for a free consultation</p>
-      <a href="#" class="btn btn-contact mt-3" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">Get Started</a>
-      
-      <div class="social-links" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-      <p data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">&copy; 2023 escope. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  
-  <script>
-    // Initialize AOS with custom settings to ensure it always works
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize AOS with settings to ensure it always works
-      AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: false, // Animations can happen every time element comes into view
-        mirror: true, // Animations happen when scrolling back up too
-        disable: function() {
-          // Don't disable on mobile devices
-          return false;
-        }
-      });
-      
-      // Refresh AOS on window resize and load to ensure it works properly
-      window.addEventListener('load', AOS.refresh);
-      window.addEventListener('resize', AOS.refresh);
-      
-      // Initialize portfolio functionality
-      initPortfolio();
-      
-      // Initialize other components
-      if (document.querySelectorAll(".card").length > 0) {
-        initCarousel();
-      }
-      
-      // Initialize Star Wars slider
-      if (document.querySelector('.sw-product-slider')) {
-        initStarWarsSlider();
-      }
-      
-      // Initialize navbar behavior
-      initNavbar();
-      
-      // Initialize card reveal effect
-      initCardReveal();
-    });
-
-    function initPortfolio() {
-      const portfolioPieces = document.querySelectorAll('.portfolio-piece');
-      let activePiece = null;
-      
-      // Set initial state
-      portfolioPieces.forEach(piece => {
-        piece.style.opacity = '0';
-        piece.style.transform = 'translateY(20px)';
-      });
-      
-      // Animate in portfolio pieces
-      setTimeout(() => {
-        portfolioPieces.forEach((piece, index) => {
-          setTimeout(() => {
-            piece.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            piece.style.opacity = '1';
-            piece.style.transform = 'translateY(0)';
-          }, index * 100);
-        });
-      }, 500);
-      
-      // Add click event listeners
-      portfolioPieces.forEach(piece => {
-        piece.addEventListener('click', function() {
-          // If clicking the same piece, close it
-          if (activePiece === this) {
-            this.classList.remove('active');
-            activePiece = null;
-            return;
-          }
-          
-          // Remove active class from previously active piece
-          if (activePiece) {
-            activePiece.classList.remove('active');
-          }
-          
-          // Add active class to clicked piece
-          this.classList.add('active');
-          activePiece = this;
-          
-          // Scroll to make the active piece visible
-          this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      });
-      
-      // Add hover effects for dots
-      portfolioPieces.forEach(piece => {
-        const titleWrapper = piece.querySelector('.piece-title-wrapper');
-        const leftDot = piece.querySelector('.hover-dot.left');
-        const rightDot = piece.querySelector('.hover-dot.right');
         
-        titleWrapper.addEventListener('mouseenter', () => {
-          if (!piece.classList.contains('active')) {
-            leftDot.style.opacity = '1';
-            rightDot.style.opacity = '1';
-            leftDot.style.transform = 'translateY(-50%) translateX(-15px)';
-            rightDot.style.transform = 'translateY(-50%) translateX(15px)';
-          }
-        });
-        
-        titleWrapper.addEventListener('mouseleave', () => {
-          if (!piece.classList.contains('active')) {
-            leftDot.style.opacity = '0';
-            rightDot.style.opacity = '0';
-            leftDot.style.transform = 'translateY(-50%) translateX(-10px)';
-            rightDot.style.transform = 'translateY(-50%) translateX(10px)';
-          }
-        });
-      });
-    }
+        <div class="stage" data-scroll-anim-block>
+            <div class="spindle" data-scroll-anim-block>
+                <div class="facia" data-scroll-anim-block data-left data-order="1">
+                    <div class="content">
+                        <img src="https://assets.codepen.io/215059/tmp-music-6.png" alt="Music Album 1"/>
+                    </div>
+                </div>
+                <div class="facia" data-scroll-anim-block data-right data-order="1">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-6.png" alt="Music Album 1"/></div>
+                </div>
+                <div class="facia" data-scroll-anim-block data-left data-order="2">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-9.png" alt="Music Album 2"/></div>
+                </div>
+                <div class="facia" data-scroll-anim-block data-right data-order="2">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-9.png" alt="Music Album 2"/></div>
+                </div>
+                
+                <div class="facia" data-scroll-anim-block data-left data-order="3">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-8.png" alt="Music Album 3"/></div>
+                </div>
+                <div class="facia" data-scroll-anim-block data-right data-order="3">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-8.png" alt="Music Album 3"/></div>
+                </div>
+                
+                <div class="facia" data-scroll-anim-block data-left data-order="4">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-11.png" alt="Music Album 4"/></div>
+                </div>
+                <div class="facia" data-scroll-anim-block data-right data-order="4">
+                    <div class="content"><img src="https://assets.codepen.io/215059/tmp-music-11.png" alt="Music Album 4"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-item" id="item1"></div>
+        <div class="scroll-item" id="item2"></div>
+        <div class="scroll-item" id="item3"></div>
+        <div class="scroll-item" id="item4"></div>
+    </div>
 
-    function initCarousel() {
-      const teamMembers = [
-        { name: "Creative Design", role: "We create visually stunning designs that capture your brand's essence and engage your audience." },
-        { name: "Digital Marketing", role: "Our data-driven marketing strategies help you reach the right audience and maximize ROI." },
-        { name: "Web Development", role: "We build responsive, high-performance websites and applications with cutting-edge technologies." },
-        { name: "Mobile Apps", role: "From iOS to Android, we create intuitive mobile experiences that users love." },
-        { name: "SEO Optimization", role: "Boost your visibility and rankings with our comprehensive SEO strategies." },
-        { name: "Social Media", role: "Engage your audience and build your brand with our social media expertise." },
-      ];
-
-      const cards = document.querySelectorAll(".card");
-      const memberName = document.querySelector(".member-name");
-      const memberRole = document.querySelector(".member-role");
-      const leftArrow = document.querySelector(".nav-arrow.left");
-      const rightArrow = document.querySelector(".nav-arrow.right");
-      let currentIndex = 0;
-      let isAnimating = false;
-
-      function updateCarousel(newIndex) {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        currentIndex = (newIndex + cards.length) % cards.length;
-
-        cards.forEach((card, i) => {
-          const offset = (i - currentIndex + cards.length) % cards.length;
-
-          card.classList.remove(
-            "center",
-            "left-1",
-            "left-2",
-            "right-1",
-            "right-2",
-            "hidden"
-          );
-
-          if (offset === 0) {
-            card.classList.add("center");
-          } else if (offset === 1) {
-            card.classList.add("right-1");
-          } else if (offset === 2) {
-            card.classList.add("right-2");
-          } else if (offset === cards.length - 1) {
-            card.classList.add("left-1");
-          } else if (offset === cards.length - 2) {
-            card.classList.add("left-2");
-          } else {
-            card.classList.add("hidden");
-          }
-        });
-
-        // Update member info
-        memberName.textContent = teamMembers[currentIndex].name;
-        memberRole.textContent = teamMembers[currentIndex].role;
-
-        setTimeout(() => {
-          isAnimating = false;
-        }, 800);
-      }
-
-      leftArrow.addEventListener("click", () => {
-        updateCarousel(currentIndex - 1);
-      });
-
-      rightArrow.addEventListener("click", () => {
-        updateCarousel(currentIndex + 1);
-      });
-
-      cards.forEach((card, i) => {
-        card.addEventListener("click", () => {
-          updateCarousel(i);
-        });
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") {
-          updateCarousel(currentIndex - 1);
-        } else if (e.key === "ArrowRight") {
-          updateCarousel(currentIndex + 1);
-        }
-      });
-
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      document.addEventListener("touchstart", (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      });
-
-      document.addEventListener("touchend", (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      });
-
-      function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-          if (diff > 0) {
-            updateCarousel(currentIndex + 1);
-          } else {
-            updateCarousel(currentIndex - 1);
-          }
-        }
-      }
-
-      // Initialize the carousel
-      updateCarousel(0);
-    }
-    
-    function initStarWarsSlider() {
-      var swiper = new Swiper('.sw-product-slider', {
-        spaceBetween: 30,
-        effect: 'fade',
-        loop: false,
-        navigation: {
-          nextEl: '.sw-next-btn',
-          prevEl: '.sw-prev-btn'
-        },
-        on: {
-          init: function(){
-            var index = this.activeIndex;
-            var target = this.slides[index].getAttribute('data-target');
-            
-            document.querySelectorAll('.sw-product-img__item').forEach(function(item) {
-              item.classList.remove('active');
+    <script>
+        // Fallback for browsers that don't support scroll animation timeline
+        if (!CSS.supports('animation-timeline: scroll()')) {
+            document.querySelector('.scroller').addEventListener('scroll', function() {
+                const scrollPosition = this.scrollTop;
+                const windowHeight = window.innerHeight;
+                const scrollPercent = scrollPosition / (windowHeight * 3); // 3 = item-count - 1
+                
+                // Update custom properties for fallback
+                document.documentElement.style.setProperty('--scroll-progress', scrollPercent);
             });
-            
-            document.getElementById(target).classList.add('active');
-            
-            // Update button states
-            updateButtonStates(this);
-          }
         }
-      });
-
-      swiper.on('slideChange', function () {
-        var index = this.activeIndex;
-        var target = this.slides[index].getAttribute('data-target');
-        
-        document.querySelectorAll('.sw-product-img__item').forEach(function(item) {
-          item.classList.remove('active');
-        });
-        
-        document.getElementById(target).classList.add('active');
-        
-        // Update button states
-        updateButtonStates(this);
-      });
-      
-      // Function to update button states
-      function updateButtonStates(swiperInstance) {
-        const prevBtn = document.querySelector('.sw-prev-btn');
-        const nextBtn = document.querySelector('.sw-next-btn');
-        
-        if(swiperInstance.isEnd) {
-          nextBtn.classList.add('disabled');
-        } else {
-          nextBtn.classList.remove('disabled');
-        }
-
-        if(swiperInstance.isBeginning) {
-          prevBtn.classList.add('disabled');
-        } else {
-          prevBtn.classList.remove('disabled');
-        }
-      }
-    }
-    
-    function initNavbar() {
-      const navbar = document.querySelector('.custom-navbar');
-      let lastScrollTop = 0;
-      const scrollThreshold = 100;
-
-      window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > scrollThreshold) {
-          if (scrollTop > lastScrollTop) {
-            navbar.classList.add('navbar-hidden');
-            navbar.classList.remove('navbar-visible');
-          } else {
-            navbar.classList.remove('navbar-hidden');
-            navbar.classList.add('navbar-visible');
-          }
-        } else {
-          navbar.classList.remove('navbar-hidden');
-          navbar.classList.add('navbar-visible');
-        }
-        
-        lastScrollTop = scrollTop;
-      });
-    }
-    
-    function initCardReveal() {
-      function addRevealEffect(elements) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add('reveal-custome');
-          });
-        }, { threshold: 0.1 });
-
-        elements.forEach((element) => observer.observe(element));
-      }
-
-      const elementsToReveal = document.querySelectorAll('.card-custome:not(.hero-custome)');
-      addRevealEffect(elementsToReveal);
-    }
-  </script>
+    </script>
 </body>
 </html>
