@@ -3,587 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Wars Product Showcase</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <title>3D Circular Text Animation</title>
     <style>
-        @font-face {
-            font-family: 'StarWarsFont';
-            src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff2') format('woff2'),
-            url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff') format('woff'),
-            url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansHeavyCAPS.ttf') format('truetype');
-            font-weight: 900;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'StarWarsFont';
-            src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff2') format('woff2'),
-            url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff') format('woff'),
-            url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansThinCAPS.ttf') format('truetype');
-            font-weight: 500;
-            font-style: normal;
-        }
-
-        body {
-            font-family: 'StarWarsFont', sans-serif;
-            font-weight: 500;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #0c1e2c;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        * {
             box-sizing: border-box;
         }
 
-        img {
-            max-width: 100%;
-        }
-
-        .sw-wrapper {
-            width: 100%;
+        body {
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             min-height: 100vh;
-            background-size: cover;
-            position: relative;
-            overflow: hidden;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .sw-content {
-            height: 600px;
-            margin: auto;
+        .container {
             width: 100%;
-            max-width: 1050px;
+            max-width: 1200px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .pen {
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 60vh;
+            overflow: hidden;
+        }
+
+        .stage {
+            margin: auto;
+            padding: 1px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            perspective-origin: center;
+            transform-style: preserve-3d;
+            transform: skewY(-6deg);
+            width: 1000px;
+            perspective: 750px;
+        }
+
+        .stage::before, .stage::after {
+            content: '';
+            width: 15%;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), transparent);
+            position: absolute;
+            left: 17%;
+            top: -50%;
+            bottom: -50%;
+            display: block;
+            z-index: 1;
+        }
+
+        .stage::after {
+            left: auto;
+            right: 17%;
+            background-image: linear-gradient(to left, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        .vortext {
+            position: relative;
+            text-align: center;
+            transform-style: preserve-3d;
+            margin-top: -30px;
+        }
+
+        .vortext:first-child {
+            margin-top: 0;
+        }
+
+        .vortext::before {
+            content: 'A';
+            font-size: 120px;
+            color: transparent;
+            pointer-events: none;
+        }
+
+        .vortextRibbon {
+            position: absolute;
+            top: 0;
+            left: -9999px;
+            right: -9999px;
+            margin: auto;
+            bottom: 0;
+            width: 3141.5px; /* π * 1000px */
+            transform-style: preserve-3d;
+            transform-origin: center;
+            transition: transform linear 240s;
+            transform: translateZ(-500px) rotateY(0deg);
+        }
+
+        .letterWrap {
             display: flex;
             align-items: center;
-            position: relative;
-        }
-
-        .sw-bg-shape {
-            height: 100%;
-            background-image: linear-gradient(-45deg, #cc3843 0%, #cb193f 100%);
-            box-shadow: 0px 30px 139px 0px rgba(10, 22, 31, 0.26);
-            border-radius: 30px;
-            padding: 45px 40px;
-            width: 50%;
+            justify-content: center;
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
+            margin: auto;
+            height: 100%;
+            width: auto;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        .letter {
+            display: inline-block;
+            color: #fff;
+            font-size: 0;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        .letter > span {
             display: flex;
+            height: 100%;
+            width: 100%;
+            transform: translateZ(500px);
             align-items: center;
             justify-content: center;
-        }
-
-        .sw-text-logo {
-            font-size: 52px;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-align: center;
-            line-height: 1.2;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 120px;
+            font-weight: 800;
             text-transform: uppercase;
-            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+            position: relative;
+            backface-visibility: hidden;
         }
 
-        .sw-text-logo span {
-            display: block;
-            font-size: 28px;
-            letter-spacing: 8px;
-            margin-top: 10px;
-        }
-
-        .sw-nav-btn {
-            z-index: 22;
-            display: inline-flex;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .controls {
+            margin-top: 2rem;
+            display: flex;
             justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            position: absolute;
-            top: 50%;
-            outline: none;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.2);
+            gap: 1rem;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.1);
             color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
-        .sw-nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .sw-prev-btn {
-            left: 20px;
-        }
-
-        .sw-next-btn {
-            right: 20px;
-        }
-
-        .sw-nav-btn.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .sw-nav-btn.disabled:hover {
+        button:hover {
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .sw-product-slider {
-            width: 75%;
-            height: 85%;
-            border-radius: 30px;
-            box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            overflow: hidden;
-        }
-
-        .sw-product-slider__wrp {
-            height: 100%;
-        }
-
-        .sw-product-slider__item {
-            position: relative;
-            height: 100%;
-            width: 100%;
-        }
-
-        .sw-product-slider__card {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            transition: all .5s;
-            overflow: hidden;
-            position: relative;
-            border-radius: 30px;
-        }
-
-        .sw-product-slider__cover {
-            border-radius: 30px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-        }
-
-        .sw-product-slider__content {
-            color: #fff;
-            padding-top: 1px;
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            padding-left: 250px;
-            padding-right: 80px;
-        }
-
-        .sw-product-slider__title {
-            margin: 0;
-            margin-bottom: 10px;
-            font-weight: 900;
-            font-size: 41px;
-            line-height: 1.2em;
-            letter-spacing: 2px;
-        }
-
-        .sw-product-img {
-            position: absolute;
-            z-index: 2;
-            width: 500px;
-            left: 25%;
-            transform: translateX(-45%);
-            max-height: 500px;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .sw-product-img__item {
-            display: flex;
-            align-items: center;
-            position: absolute;
-            pointer-events: none;
-            user-select: none;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%) translateX(-130px);
-            opacity: 0;
-            transition: all .3s;
-        }
-
-        .sw-product-img__item.active {
-            opacity: 1;
-            transform: translateY(-50%) translateX(0);
-            transition-delay: .3s;
-        }
-
-        .sw-product-img__img {
-            object-fit: contain;
-            object-position: center right;
-            max-height: 400px;
-        }
-
-        /* Arrow icons */
-        .sw-arrow-icon {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-
-        /* Responsive styles */
-        @media screen and (max-width: 1200px) {
-            .sw-content {
-                max-width: 920px;
-            }
-            
-            .sw-bg-shape {
-                width: 45%;
-            }
-            
-            .sw-text-logo {
-                font-size: 42px;
-            }
-            
-            .sw-text-logo span {
-                font-size: 22px;
-            }
-            
-            .sw-product-slider {
-                width: 80%;
-            }
-            
-            .sw-product-slider__content {
-                padding-left: 220px;
-            }
-            
-            .sw-product-slider__title {
-                font-size: 34px;
-            }
-            
-            .sw-product-img {
-                width: 430px;
-                left: 20%;
-            }
-        }
-
-        @media screen and (max-width: 992px) {
-            .sw-wrapper {
-                height: auto;
-                min-height: 100vh;
-            }
-            
-            .sw-content {
-                max-width: 920px;
-                margin-top: 100px;
-                height: auto;
-                min-height: 100vh;
-            }
-            
-            .sw-bg-shape {
-                width: 90%;
-                height: 290px;
-                align-items: flex-start;
-                padding: 50px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
-            .sw-text-logo {
-                font-size: 38px;
-            }
-            
-            .sw-product-slider {
-                width: 80%;
-                left: 50%;
-                transform: translateX(-50%);
-                height: auto;
-                position: relative;
-                top: 0;
-                margin-top: 170px;
-                margin-bottom: 100px;
-            }
-            
-            .sw-product-slider__content {
-                padding: 20px 60px 100px;
-                padding-top: 280px;
-                text-align: center;
-            }
-            
-            .sw-product-img {
-                width: 430px;
-                left: 50%;
-                transform: translateX(-50%);
-                top: 0;
-                height: 350px;
-            }
-            
-            .sw-nav-btn {
-                top: 170px;
-                z-index: 25;
-            }
-            
-            .sw-prev-btn {
-                left: 10px;
-            }
-            
-            .sw-next-btn {
-                right: 10px;
-            }
-        }
-
-        @media screen and (max-width: 767px) {
-            .sw-content {
-                margin-top: 20px;
-            }
-            
-            .sw-bg-shape {
-                padding: 30px;
-                width: 95%;
-                border-radius: 20px;
-            }
-            
-            .sw-text-logo {
-                font-size: 32px;
-            }
-            
-            .sw-text-logo span {
-                font-size: 18px;
-            }
-            
-            .sw-product-slider {
-                border-radius: 20px;
-            }
-            
-            .sw-product-slider__content {
-                padding: 20px 30px 50px;
-                padding-top: 300px;
-            }
-            
-            .sw-product-img {
-                width: 100%;
-                max-width: 400px;
-                top: 30px;
-                height: 390px;
-            }
-            
-            .sw-nav-btn {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .sw-arrow-icon {
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        @media screen and (max-width: 576px) {
-            .sw-bg-shape {
-                height: 200px;
-                padding: 30px;
-            }
-            
-            .sw-text-logo {
-                font-size: 26px;
-            }
-            
-            .sw-text-logo span {
-                font-size: 14px;
-                letter-spacing: 6px;
-            }
-            
-            .sw-product-slider {
-                width: 85%;
-                margin-top: 130px;
-            }
-            
-            .sw-product-slider__content {
-                padding-top: 220px;
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-            
-            .sw-product-slider__title {
-                font-size: 24px;
-            }
-            
-            .sw-product-img {
-                max-width: 300px;
-                height: 300px;
-            }
-            
-            .sw-nav-btn {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .sw-arrow-icon {
-                width: 16px;
-                height: 16px;
-            }
+        .instructions {
+            margin-top: 2rem;
+            color: #aaa;
+            font-size: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-  <section class="sw-section">
-    <div class="sw-wrapper">
-        <div class="sw-content">
-            <div class="sw-bg-shape">
-                <div class="sw-text-logo">
-                    STAR WARS
-                    <span>COLLECTION</span>
+    <div class="container">
+        <h1>World Cities 3D Animation</h1>
+        
+        <div class="pen">
+            <div class="stage">
+                <div class="vortext">
+                    <div class="vortextRibbon" id="ribbon1">San Francisco. Vancouver. Chicago. New York.</div>
                 </div>
-            </div>
-
-            <div class="sw-product-img">
-                <div class="sw-product-img__item" id="sw-img1">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-1.webp" alt="star wars" class="sw-product-img__img">
+                <div class="vortext">
+                    <div class="vortextRibbon" id="ribbon2">Barcelona. Paris. London. Berlin. Stockholm.</div>
                 </div>
-
-                <div class="sw-product-img__item" id="sw-img2">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-2.webp" alt="star wars" class="sw-product-img__img">
+                <div class="vortext">
+                    <div class="vortextRibbon" id="ribbon3">Cairo. Nairobi. Johannesburg. Tel Aviv. Dubai.</div>
                 </div>
-
-                <div class="sw-product-img__item" id="sw-img3">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405218/starwars/item-3.webp" alt="star wars" class="sw-product-img__img">
+                <div class="vortext">
+                    <div class="vortextRibbon" id="ribbon4">Mumbai. Bangkok. Singapore. Hanoi. Jakarta.</div>
                 </div>
-
-                <div class="sw-product-img__item" id="sw-img4">
-                    <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-4.webp" alt="star wars" class="sw-product-img__img">
-                </div>
-            </div>
-
-            <div class="sw-product-slider">
-                <button class="sw-nav-btn sw-prev-btn disabled">
-                    <svg class="sw-arrow-icon" viewBox="0 0 32 32">
-                        <path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z"></path>
-                    </svg>
-                </button>
-                <button class="sw-nav-btn sw-next-btn">
-                    <svg class="sw-arrow-icon" viewBox="0 0 32 32">
-                        <path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z"></path>
-                    </svg>
-                </button>
-
-                <div class="sw-product-slider__wrp swiper-wrapper">
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img4">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405223/starwars/item-4-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    STORMTROOPER <br>
-                                    HELMET
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img1">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    IMPERIAL ARMY'S <br> TIE FIGHTER
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img2">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-2-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    KYLO REN'S <br> LIGHTSABER
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sw-product-slider__item swiper-slide" data-target="sw-img3">
-                        <div class="sw-product-slider__card">
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-3-bg.webp" alt="star wars" class="sw-product-slider__cover">
-                            <div class="sw-product-slider__content">
-                                <h1 class="sw-product-slider__title">
-                                    IMPERIAL ARMY'S <br>
-                                    DEATH STAR
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
+                <div class="vortext">
+                    <div class="vortextRibbon" id="ribbon5">Shanghai. Taipei. Tokyo. Melbourne. Auckland.</div>
                 </div>
             </div>
         </div>
+
+        <div class="controls">
+            <button id="playBtn">Play</button>
+            <button id="pauseBtn">Pause</button>
+            <button id="reverseBtn">Reverse</button>
+        </div>
+
+        <div class="instructions">
+            <p>This 3D animation displays cities from around the world in a cylindrical formation. Use the controls to play, pause, or reverse the animation.</p>
+        </div>
     </div>
-</section>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var swiper = new Swiper('.sw-product-slider', {
-                spaceBetween: 30,
-                effect: 'fade',
-                loop: false,
-                navigation: {
-                    nextEl: '.sw-next-btn',
-                    prevEl: '.sw-prev-btn'
-                },
-                on: {
-                    init: function(){
-                        var index = this.activeIndex;
-                        var target = this.slides[index].getAttribute('data-target');
-                        
-                        document.querySelectorAll('.sw-product-img__item').forEach(function(item) {
-                            item.classList.remove('active');
-                        });
-                        
-                        document.getElementById(target).classList.add('active');
-                        
-                        // Set initial button states
-                        updateButtonStates(this);
+            const DIAMETER = 1000;
+            const PROJECTION = DIAMETER / 2;
+            const ANIM_DUR = 240000; // 240 seconds
+            
+            const ribbons = [
+                document.getElementById('ribbon1'),
+                document.getElementById('ribbon2'),
+                document.getElementById('ribbon3'),
+                document.getElementById('ribbon4'),
+                document.getElementById('ribbon5')
+            ];
+            
+            const playBtn = document.getElementById('playBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const reverseBtn = document.getElementById('reverseBtn');
+            
+            let animationDirection = 1;
+            let animationPlaying = true;
+            
+            // Function to calculate angle for each letter
+            const getAngle = (adjacentLen, oppositeLen) => {
+                const hypotenuse = Math.hypot(adjacentLen, oppositeLen);
+                return Math.asin(oppositeLen / hypotenuse) * 180 / Math.PI;
+            };
+            
+            // Function to generate HTML for each letter
+            const getLetterMarkup = (letter) => 
+                `<div class="letterWrap"><div class="letter"><span>${letter}</span></div></div>`;
+            
+            // Initialize the ribbons
+            function initRibbons() {
+                ribbons.forEach((ribbon, index) => {
+                    const str = ribbon.innerText.replace(/ /g, '\u00a0');
+                    let newHtmlStr = str.split('').map(s => getLetterMarkup(s)).join('');
+                    ribbon.innerHTML = newHtmlStr;
+                    
+                    const bounds = ribbon.getBoundingClientRect();
+                    let contentWidth = 0;
+                    
+                    // Calculate total content width
+                    for (let child of ribbon.children) {
+                        contentWidth += child.children[0].getBoundingClientRect().width;
                     }
-                }
-            });
-
-            swiper.on('slideChange', function () {
-                var index = this.activeIndex;
-                var target = this.slides[index].getAttribute('data-target');
+                    
+                    const delta = bounds.width - contentWidth;
+                    let proportionInc = 0;
+                    
+                    // Position each letter
+                    for (let i = 0; i < ribbon.children.length; i++) {
+                        const correction = 3.1;
+                        const paddingMultiplier = 1.75;
+                        
+                        const childEl = ribbon.children[i].children[0];
+                        const grandChildEl = childEl.children[0];
+                        const grandChildBounds = grandChildEl.getBoundingClientRect();
+                        
+                        const padding = delta / str.length * paddingMultiplier;
+                        const boundsWidth = grandChildBounds.width + correction + padding;
+                        const halfAngle = getAngle(PROJECTION, boundsWidth / 2);
+                        
+                        proportionInc += halfAngle;
+                        childEl.style.transform = `rotateY(${proportionInc - 90}deg)`;
+                        proportionInc += halfAngle;
+                    }
+                    
+                    // Set initial rotation
+                    ribbon.style.transform = `translateZ(-${PROJECTION}px) rotateY(0deg)`;
+                });
+            }
+            
+            // Animation function
+            function animate() {
+                if (!animationPlaying) return;
                 
-                document.querySelectorAll('.sw-product-img__item').forEach(function(item) {
-                    item.classList.remove('active');
+                const now = Date.now();
+                const rotation = (now / ANIM_DUR * 360 * animationDirection) % 360;
+                
+                ribbons.forEach((ribbon, index) => {
+                    // Alternate rotation direction for visual interest
+                    const dir = index % 2 === 0 ? -1 : 1;
+                    ribbon.style.transform = `translateZ(-${PROJECTION}px) rotateY(${dir * rotation}deg)`;
                 });
                 
-                document.getElementById(target).classList.add('active');
-                
-                // Update button states after slide change
-                updateButtonStates(this);
+                requestAnimationFrame(animate);
+            }
+            
+            // Control functions
+            playBtn.addEventListener('click', () => {
+                animationPlaying = true;
+                animate();
             });
             
-            // Function to update button states
-            function updateButtonStates(swiperInstance) {
-                const prevBtn = document.querySelector('.sw-prev-btn');
-                const nextBtn = document.querySelector('.sw-next-btn');
-                
-                if(swiperInstance.isEnd) {
-                    nextBtn.classList.add('disabled');
-                } else {
-                    nextBtn.classList.remove('disabled');
+            pauseBtn.addEventListener('click', () => {
+                animationPlaying = false;
+            });
+            
+            reverseBtn.addEventListener('click', () => {
+                animationDirection *= -1;
+                if (!animationPlaying) {
+                    animationPlaying = true;
+                    animate();
                 }
-
-                if(swiperInstance.isBeginning) {
-                    prevBtn.classList.add('disabled');
-                } else {
-                    prevBtn.classList.remove('disabled');
-                }
-            }
+            });
+            
+            // Initialize and start animation
+            initRibbons();
+            animate();
         });
     </script>
 </body>
